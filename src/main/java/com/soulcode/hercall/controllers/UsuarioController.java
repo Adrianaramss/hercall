@@ -32,10 +32,8 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/usuarios/{id}")
-    public String deleteById(@PathVariable Long id){
+    public UsuarioDto deleteById(@PathVariable Long id){
         return this.usuarioService.deleteById(id);
     }
-
-
 
 }
