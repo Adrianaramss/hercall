@@ -1,5 +1,6 @@
 package com.soulcode.hercall.services;
 
+import com.soulcode.hercall.dtos.PrioridadeDto;
 import com.soulcode.hercall.dtos.UsuarioDto;
 import com.soulcode.hercall.models.Usuario;
 import com.soulcode.hercall.repositories.UsuarioRepository;
@@ -43,10 +44,10 @@ public class UsuarioService {
         return new UsuarioDto(usuario);
     }
 
-    public String deleteById(Long id) {
-        UsuarioDto dto = findById(id);
+    public UsuarioDto deleteById(Long id) {
+        UsuarioDto usuarioDto = findById(id);
         this.usuarioRepository.deleteById(id);
-        return ( " O cliente de número " + dto.getId() + " foi excluído");
 
+        return usuarioDto;
     }
 }
