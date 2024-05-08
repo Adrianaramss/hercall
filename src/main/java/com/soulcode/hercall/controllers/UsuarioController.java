@@ -1,5 +1,6 @@
 package com.soulcode.hercall.controllers;
 
+import com.soulcode.hercall.dtos.StatusDto;
 import com.soulcode.hercall.dtos.UsuarioDto;
 import com.soulcode.hercall.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import java.util.List;
 public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
+
     @PostMapping("/usuarios")
     public UsuarioDto save(@RequestBody UsuarioDto dto){
         return this.usuarioService.save(dto);

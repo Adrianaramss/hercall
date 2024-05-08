@@ -1,6 +1,6 @@
 package com.soulcode.hercall.services;
 
-import com.soulcode.hercall.dtos.PrioridadeDto;
+
 import com.soulcode.hercall.dtos.UsuarioDto;
 import com.soulcode.hercall.models.Usuario;
 import com.soulcode.hercall.repositories.UsuarioRepository;
