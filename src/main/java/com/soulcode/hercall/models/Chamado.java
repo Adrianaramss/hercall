@@ -13,7 +13,7 @@ import java.util.Date;
 public class Chamado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_chamado;
+    private Long id;
 
     @Column
     private String descricao;
@@ -45,5 +45,10 @@ public class Chamado {
     @ManyToOne
     @JoinColumn(name = "id_prioridade", nullable = false)
     private Prioridade prioridade;
+
+    public Chamado(Long idChamado) {
+    }
+
+
 
 }
