@@ -7,5 +7,4 @@ public enum TipoSetor {
     RH,
     DEPARTAMENTOPESSOAL
 
-
 }
