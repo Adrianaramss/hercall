@@ -144,9 +144,41 @@ a:hover {
  width: 200px;
  height: auto;
 }
+        .logout {
+            text-decoration: none;
+            color: white;
+            background: #920069;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+
+        .logout:hover {
+            background: #740053;
+        }
+
+
+   .header {
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-info {
+            font-weight: 600;
+        }
+
     </style>
 </head>
+
 <body>
+<div class="header">
+    <div class="user-info">
+    </div>
+    <a href="/logout" class="logout">Sair</a>
+</div>
+
 <form th:action="@{/login}" method="post">
     <div class="container">
         <h2>LOGIN</h2>
