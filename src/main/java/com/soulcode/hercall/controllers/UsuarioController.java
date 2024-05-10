@@ -1,7 +1,5 @@
 package com.soulcode.hercall.controllers;
 
-import ch.qos.logback.core.model.Model;
-import com.soulcode.hercall.dtos.StatusDto;
 import com.soulcode.hercall.dtos.UsuarioDto;
 import com.soulcode.hercall.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,15 +38,14 @@ public class UsuarioController {
         return this.usuarioService.deleteById(id);
     }
 
-
-    @GetMapping("/tela-tecnico")
-    public String telaTecnico() {
-        return "tela-tecnico";
-    }
-
     @GetMapping("/login")
     public String login() {
         return "login";
+    }
+
+    @GetMapping("/cadastro")
+    public String cadastro() {
+        return "cadastro";
     }
 
     @GetMapping("/tela-usuario")
@@ -56,14 +53,29 @@ public class UsuarioController {
         return "tela-usuario";
     }
 
+    @GetMapping("/tela-tecnico")
+    public String telaTecnico() {
+        return "tela-tecnico";
+    }
+
     @GetMapping("/tela-admin")
     public String telaAdmin() {
         return "tela-admin";
     }
 
-    @GetMapping("/cadastro")
-    public String cadastro() {
-        return "cadastro";
+    @GetMapping("/tela-usuarios")
+    public String telaUsuarios() {
+        return "tela-usuarios";
+    }
+
+    @GetMapping("/tela-prioridades")
+    public String telaPriodades() {
+        return "tela-prioridades";
+    }
+
+    @GetMapping("/tela-setores")
+    public String telaSetores() {
+        return "tela-setores";
     }
 
 }
