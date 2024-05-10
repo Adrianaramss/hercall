@@ -1,255 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administração de Chamados Técnicos</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-        font-family: "Poppins", sans-serif;
-        margin: 0;
-        padding: 0;
-        background: linear-gradient(to bottom, #020F1F, #451776);
-        color: white;
-        }
 
-
-        .header {
-        background: rgba(255, 255, 255, 0.2);
-        padding: 15px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        }
-
-
-        .user-info {
-        font-weight: 600;
-        }
-
-
-        .logout {
-        text-decoration: none;
-        color: white;
-        background: #920069;
-        padding: 10px;
-        border-radius: 20px;
-        font-weight: 600;
-        transition: background 0.3s;
-        }
-
-
-        .logout:hover {
-        background: #740053;
-        }
-
-
-        .container {
-        background: rgba(255, 255, 255, 0.2);
-        padding: 20px;
-        margin-top: 20px;
-        border-radius: 10px;
-        }
-
-
-        .section {
-        margin-bottom: 20px;
-        }
-
-
-        .call-status {
-        display: flex;
-        justify-content: space-around;
-    }
-
-
-    .call-box {
-        background-color: rgba(255, 255, 255, 0.2);
-        padding: 20px;
-        border-radius: 10px;
-        text-align: center;
-        flex: 1;
-        margin: 0 10px;
-    }
-
-
-    .call-box h3 {
-        margin-top: 0;
-    }
-
-
-    .call-box p {
-        font-size: 24px;
-        margin: 10px 0;
-    }
-
-
-
-
-        .add-btn {
-        background-color: #920069;
-        color: white;
-        padding: 8px 16px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-weight: 600;
-        margin-bottom: 10px;
-        transition: background-color 0.3s;
-        }
-
-
-        .add-btn:hover {
-        background-color: #740053;
-        }
-        .departments li {
-        margin-bottom: 5px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.5); /* Adiciona uma linha de separação */
-        padding-bottom: 5px; /* Espaçamento opcional entre os setores e a linha */
-         display: flex;
-        align-items: center; /* Alinha verticalmente */
-        justify-content: space-between; /* Distribui o conteúdo horizontalmente */
-        }
-
-
-
-
-        .departments, .priorities {
-        list-style: none;
-        padding: 0;
-        }
-
-
-        .departments li, .priorities li {
-        margin-bottom: 5px;
-        }
-
-
-        .call-table {
-               width: 100%;
-               border-collapse: collapse;
-               border-spacing: 0;
-               margin-top: 10px;
-           }
-
-
-
-
-           .call-table th {
-               padding: 10px;
-               text-align: left;
-               background: rgba(255, 255, 255, 0.5);
-               font-weight: 600;
-           }
-
-
-
-
-           .call-table td {
-               padding: 10px;
-               border-bottom: 1px solid #ccc;
-           }
-
-
-
-
-           .edit-icon {
-               cursor: pointer;
-               padding: 10px;
-               color: white;
-               font-size: 18px;
-           }
-
-
-
-
-           .modal {
-               display: none;
-               position: fixed;
-               top: 0;
-               left: 0;
-               right: 0;
-               bottom: 0;
-               background: rgba(0, 0, 0, 0.5);
-               justify-content: center;
-               align-items: center;
-               z-index: 100;
-           }
-
-
-
-
-           .modal-content {
-               background: white;
-               padding: 20px;
-               border-radius: 10px;
-               width: 400px;
-               text-align: center;
-               color: black;
-           }
-
-
-
-
-           .modal-content h3 {
-               margin: 0;
-           }
-
-
-
-
-           .close-modal {
-               background: #920069;
-               color: white;
-               padding: 10px;
-               border-radius: 10px;
-               cursor: pointer;
-               transition: background 0.3s;
-           }
-
-
-
-
-           .close-modal:hover {
-               background: #740053;
-           }
-
-
-
-
-           .save-modal {
-               background: #0069d9;
-               color: white;
-               padding: 10px;
-               border-radius: 10px;
-               cursor: pointer;
-               transition: background 0.3s;
-               margin-left: 10px;
-           }
-
-
-
-
-           .save-modal:hover {
-               background: #0056b3;
-           }
-
-
-            .delete-btn {
-        background: none;
-        border: none;
-        cursor: pointer;
-        font-size: inherit;
-        color: inherit;
-        padding: 0;
-        margin-right: 1610px;
-    }
-
-
-
-
-    </style>
 </head>
 
 
@@ -257,7 +13,7 @@
     <div class="user-info">
         Bem vindo, Administrador!
     </div>
-    <a href="#" class="logout">Sair</a>
+    <a href="/" class="logout">Sair</a>
 </div>
 
 
@@ -282,26 +38,32 @@
 </div>
 
 
-
-
-</div>
-</div>
-
-
 <div class="container">
     <div class="section">
-        <h2>Gerenciamento de Setores</h2>
-        <form id="addDepartmentForm">
-            <input type="text" id="newDepartment" placeholder="Novo Setor">
-            <button type="submit" class="add-btn">Adicionar Setor</button>
+        <form action="/tela-admin" method="post">
+            <h2>Gerenciamento de Setores</h2>
+            <form id="addDepartmentForm">
+                <input type="text" id="newDepartment" placeholder="Novo Setor">
+                <button type="submit" class="add-btn">Adicionar Setor</button>
+            </form>
+            <ul class="departments">
+                <li>Suporte
+                    <button class="delete-btn">❌</button>
+                </li>
+                <li>Financeiro
+                    <button class="delete-btn">❌</button>
+                </li>
+                <li>Marketing
+                    <button class="delete-btn">❌</button>
+                </li>
+                <li>RH
+                    <button class="delete-btn">❌</button>
+                </li>
+                <li>Departamento Pessoal
+                    <button class="delete-btn">❌</button>
+                </li>
+            </ul>
         </form>
-        <ul class="departments">
-            <li>Suporte<button class="delete-btn">❌</button></li>
-            <li>Financeiro<button class="delete-btn">❌</button></li>
-            <li>Marketing<button class="delete-btn">❌</button></li>
-            <li>RH<button class="delete-btn">❌</button></li>
-            <li>Departamento Pessoal<button class="delete-btn">❌</button></li>
-        </ul>
     </div>
 </div>
 
@@ -334,10 +96,9 @@
                         <td>Em-Atendimento</td>
 
 
-
-
                         <td>
-                            <span class="edit-icon" onclick="openModal('Computador não liga', 'Andamento', 'Alta')">✏️</span>
+                            <span class="edit-icon"
+                                  onclick="openModal('Computador não liga', 'Andamento', 'Alta')">✏️</span>
                         </td>
                     </tr>
                     <tr>
@@ -347,8 +108,6 @@
                         <td>Média</td>
                         <td>05/05/2024</td>
                         <td>Aberto</td>
-
-
 
 
                         <td>
@@ -361,19 +120,11 @@
         </div>
 
 
-
-
         <!-- Modal -->
         <div class="modal" id="edit-modal">
             <div class="modal-content">
                 <h3>Editar Ordem de Serviço</h3>
                 <p id="order-description">Descrição da ordem</p>
-
-
-
-
-
-
 
 
                 <!-- Select para prioridade -->
@@ -384,8 +135,6 @@
                     <option value="Médio">Médio</option>
                     <option value="Baixo">Baixo</option>
                 </select>
-
-
 
 
                 <div style="margin-top: 10px;">
@@ -399,8 +148,6 @@
             </div>
         </div>
     </div>
-
-
 
 
     <script>
@@ -458,5 +205,248 @@
 
 
 </div>
+<style>
+    body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #020F1F, #451776);
+    color: white;
+    }
+
+
+    .header {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+
+
+    .user-info {
+    font-weight: 600;
+    }
+
+
+    .logout {
+    text-decoration: none;
+    color: white;
+    background: #920069;
+    padding: 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    transition: background 0.3s;
+    }
+
+
+    .logout:hover {
+    background: #740053;
+    }
+
+
+    .container {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    }
+
+
+    .section {
+    margin-bottom: 20px;
+    }
+
+
+    .call-status {
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.call-box {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    flex: 1;
+    margin: 0 10px;
+}
+
+
+.call-box h3 {
+    margin-top: 0;
+}
+
+
+.call-box p {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+
+
+
+    .add-btn {
+    background-color: #920069;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+    }
+
+
+    .add-btn:hover {
+    background-color: #740053;
+    }
+    .departments li {
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5); /* Adiciona uma linha de separação */
+    padding-bottom: 5px; /* Espaçamento opcional entre os setores e a linha */
+     display: flex;
+    align-items: center; /* Alinha verticalmente */
+    justify-content: space-between; /* Distribui o conteúdo horizontalmente */
+    }
+
+
+
+
+    .departments, .priorities {
+    list-style: none;
+    padding: 0;
+    }
+
+
+    .departments li, .priorities li {
+    margin-bottom: 5px;
+    }
+
+
+    .call-table {
+           width: 100%;
+           border-collapse: collapse;
+           border-spacing: 0;
+           margin-top: 10px;
+       }
+
+
+
+
+       .call-table th {
+           padding: 10px;
+           text-align: left;
+           background: rgba(255, 255, 255, 0.5);
+           font-weight: 600;
+       }
+
+
+
+
+       .call-table td {
+           padding: 10px;
+           border-bottom: 1px solid #ccc;
+       }
+
+
+
+
+       .edit-icon {
+           cursor: pointer;
+           padding: 10px;
+           color: white;
+           font-size: 18px;
+       }
+
+
+
+
+       .modal {
+           display: none;
+           position: fixed;
+           top: 0;
+           left: 0;
+           right: 0;
+           bottom: 0;
+           background: rgba(0, 0, 0, 0.5);
+           justify-content: center;
+           align-items: center;
+           z-index: 100;
+       }
+
+
+
+
+       .modal-content {
+           background: white;
+           padding: 20px;
+           border-radius: 10px;
+           width: 400px;
+           text-align: center;
+           color: black;
+       }
+
+
+
+
+       .modal-content h3 {
+           margin: 0;
+       }
+
+
+
+
+       .close-modal {
+           background: #920069;
+           color: white;
+           padding: 10px;
+           border-radius: 10px;
+           cursor: pointer;
+           transition: background 0.3s;
+       }
+
+
+
+
+       .close-modal:hover {
+           background: #740053;
+       }
+
+
+
+
+       .save-modal {
+           background: #0069d9;
+           color: white;
+           padding: 10px;
+           border-radius: 10px;
+           cursor: pointer;
+           transition: background 0.3s;
+           margin-left: 10px;
+       }
+
+
+
+
+       .save-modal:hover {
+           background: #0056b3;
+       }
+
+
+        .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: inherit;
+    color: inherit;
+    padding: 0;
+    margin-right: 1610px;
+}
+
+
+</style>
 </html>
 
