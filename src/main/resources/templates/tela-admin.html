@@ -156,47 +156,25 @@
             document.getElementById('order-description').innerText = 'Editando: ' + description;
 
 
-
-
-
-
-
-
-
-
             const priorityMap = {
                 'Alto': 'Alto',
                 'Médio': 'Médio',
                 'Baixo': 'Baixo'
             };
 
-
-
-
             const selectPriority = document.getElementById('priority-select');
             selectPriority.value = priorityMap[priority];
         }
-
-
-
 
         function closeModal() {
             document.getElementById('edit-modal').style.display = 'none';
         }
 
 
-
-
         function saveChanges() {
 
 
             const selectedPriority = document.getElementById('priority-select').value;
-
-
-
-
-
-
 
 
             closeModal();
@@ -256,7 +234,6 @@
     .section {
     margin-bottom: 20px;
     }
-
 
     .call-status {
     display: flex;
