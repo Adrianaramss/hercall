@@ -1,207 +1,85 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
     <title>Login</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
-<body>
-<div class="header">
-    <div class="user-info">
+<body class="bg-gradient-primary">
+
+<div class="container">
+
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Bem-vindo ao HerCall!</h1>
+                                </div>
+                                <form class="user">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control form-control-user"
+                                               id="exampleInputEmail" aria-describedby="emailHelp"
+                                               placeholder="E-mail">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control form-control-user"
+                                               id="exampleInputPassword" placeholder="Senha">
+                                    </div>
+                                    <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                        Login
+                                    </a>
+                                </form>
+                                <hr>
+                                <div class="text-center">
+                                    <a class="small" href="/cadastro">Clique aqui para criar uma conta</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
-    <a href="/" class="logout">Sair</a>
+
 </div>
 
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <div class="container">
-        <form action="/login" method="get">
-        <h2>LOGIN</h2>
-        <div class="email">
-            <label for="email">E-mail:</label>
-            <input name="email" type="text" placeholder="Email" id="email">
-        </div>
-        <div class="senha">
-            <label for="senha">Senha:</label>
-            <input name="senha" type="text" placeholder="senha" id="senha">
-        </div>
-        <div>
-            <input type="submit" value="Continuar" class="butt_login">
-            <a href="/cadastro">Não tem cadastro? Clique aqui</a>
-            <div th:if="${param.error}">
-                <p style="color: red;"> Usuário ou senha inválidos, tente novamente!</p>
-            </div>
-        </div>
-        </form>
-    </div>
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<img src="../static/img/hercall.png" alt="Logomarca" class="logo">
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
 </body>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,300&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,500&display=swap');
 
-body {
-background: linear-gradient(#020F1F, #451776);
-height: 100vh;
-margin: 0;
-}
-
-h2 {
-font-family: "Poppins", sans-serif;
-font-optical-sizing: auto;
-font-weight: 800;
-font-style: normal;
-text-align: center;
-color: #020F1F;
-}
-h3{
-font-family: "Poppins", sans-serif;
-font-optical-sizing: auto;
-font-weight: 800;
-font-style: normal;
-text-align: center;
-}
-.container {
-width: 450%;
-min-height: 50vh;
-display: flex;
-flex-direction: column;
-flex-wrap: wrap;
-justify-content: space-evenly;
-align-items: stretch;
-gap: 40px;
-background: rgba(255, 255, 255, 0.5);
-border-radius: 30px;
-position: absolute;
-left: 50%;
-top: 50%;
-transform: translate(-50%, -50%);
-align-content: space-around;
-}
-
-form {
-position:absolute;
-left:50%;
-top:50%;
-transform: translate(-50%,-50%);
-padding: 40px 50px;
-}
-
-input[type=text],
-input[type=email],
-input[type=password]{
-border: 0;
-border-bottom: 1px solid #000000;
-background: white;
-width: 100%;
-padding: 8px 0 5px 0;
-font-size: 15px;
-pointer-event:none;
-transition: all 0.5s ease-in-out;
-}
-
-
-.container input:focus{
-border:none;
-outline:none;
-border-bottom:1px solid #e74c3c;
-}
-
-.container label{
-font-family: "Poppins", sans-serif;
-border: box-block;
-margin-right: 10px;
-}
-
-.butt {
-font-family: "Poppins", sans-serif;
-font-optical-sizing: auto;
-font-weight: 500;
-font-style: normal;
-text-transform: uppercase;
-display: flex;
-justify-content: center;
-align-items: center;
-margin: 10px 10px;
-padding: 20px 20px;
-width: 50%;
-height: 40px;
-}
-
-.butt_login {
-font-family: "Poppins", sans-serif;
-font-optical-sizing: auto;
-font-weight: 500;
-font-style: normal;
-display: flex;
-justify-content: center;
-align-items: center;
-margin: 0 auto;
-padding: 20px 40px;
-width: 50%;
-}
-
-.butt_login {
-font-family: "Poppins", sans-serif;
-font-optical-sizing: auto;
-font-weight: 800;
-font-style: normal;
-width: 10vw;
-padding: 12px 15px;
-background-color: #920069;
-color: #fff;
-border: none;
-border-radius: 30px;
-font-weight: bold;
-font-size: 17px;
-cursor: pointer;
-margin-bottom: 1em;
-}
-
-a{
-text-decoration: none;
-color: black;
-font-family: "Poppins", sans-serif;
-font-weight: bold;
-text-align: center;
-margin: 30px
-}
-a:hover {
-color: white;
-}
-
-.logo {
-position: fixed;
-top: 10px;
-left: 10px;
-width: 200px;
-height: auto;
-}
-    .logout {
-        text-decoration: none;
-        color: white;
-        background: #920069;
-        padding: 8px 15px;
-        border-radius: 20px;
-        transition: background 0.3s;
-    }
-
-    .logout:hover {
-        background: #740053;
-    }
-
-
-.header {
-        padding: 15px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .user-info {
-        font-weight: 600;
-    }
-
-</style>
 </html>

@@ -1,210 +1,98 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
-    <meta charset="UTF-8">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
     <title>Cadastro</title>
 
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
 </head>
-<body>
-<div class="header">
-    <div class="user-info">
+
+<body class="bg-gradient-primary">
+
+<div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Cadastro do usuário</h1>
+                        </div>
+                        <form th:action="@{/usuarios}" method="post">
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="text" class="form-control form-control-user" id="exampleFirstName" name="nome"
+                                           placeholder="Nome" required>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control form-control-user" id="exampleMatricula" name="matricula"
+                                           placeholder="Matrícula" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail"></label>
+                                <input type="email" class="form-control form-control-user" id="exampleInputEmail" name="email"
+                                       placeholder="Email" required>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="password" class="form-control form-control-user" name="senha"
+                                           id="exampleInputPassword" placeholder="Senha" required>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="password" class="form-control form-control-user" name="confirma-senha"
+                                           id="exampleRepeatPassword" placeholder="Confirme a senha">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Tipo de usuário:</label>
+                                <label for="tecnico"> Técnico </label>
+                                <input type="radio" name="tipo" value="tecnico" id="tecnico">
+                                <label for="usuario"> Usuário </label>
+                                <input type="radio" name="tipo" value="usuario" id="usuario">
+                            </div>
+                            <button class="btn btn-primary btn-user btn-block" type="submit" id="submit_button">Cadastrar</button>
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                            <a class="small" href="/login">Já possui um cadastro? Login!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <a href="/" class="logout">Sair</a>
+
 </div>
 
-<form th:action="@{/cadastro-cliente}" method="post">
-    <div class="container">
-        <h2>Cadastro</h2>
-        <div class="nome">
-            <label for="nome">Nome:</label>
-            <input name="nome" type="text" placeholder="Nome" id="nome">
-        </div>
-        <div class="matricula">
-            <label for="matricula">Matricula:</label>
-            <input name="matricula" type="number" placeholder="Matrícula" id="matricula">
-        </div>
-        <div class="email">
-            <label for="email">E-mail:</label>
-            <input name="email" type="text" placeholder="E-mail" id="email">
-        </div>
-        <div class="senha">
-            <label para="senha">Senha:</label>
-            <input name="senha" type="text" placeholder="Senha" id="senha">
-        </div>
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Adicionando os botões de rádio para escolher o tipo de usuário -->
-        <div class="tipo-usuario">
-            <label forme="tip">Tipo de usuário:</label>
-            <input type="radio" name="tipo" value="tecnico" id="tecnico">
-            <label for="tecnico">Técnico</label>
-            <input type="radio" name="tipo" value="usuario" id="usuario">
-            <label para="usuario">Usuário</label>
-        </div>
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <div style="text-align: center;">
-            <input type="submit" value="Cadastrar" class="butt_login">
-            <p style="color: black;">Cadastro criado com sucesso!</p>
-            <a href="/login"></a>
-        </div>
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
 
-        <div th:if="${param.error}">
-            <p class="subir" style="color: red;">Cadastro não realizado, verifique as informações!</p>
-        </div>
-    </div>
-</form>
-<img src="../static/img/hercall.png" alt="Logomarca" class="logo">
 </body>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,300&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,500&display=swap');
 
-  body {
-  background: linear-gradient(#020F1F, #451776);
-  height: 100vh;
-  margin: 0;
-  }
-
-  h2 {
-  font-family: "Poppins", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 800;
-  font-style: normal;
-  text-align: center;
-  color: #020F1F;
-  }
-
-  h3{
-  font-family: "Poppins", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 800;
-  font-style: normal;
-  text-align: center;
-  }
-
-  .container {
-
-
-  width: 450%;
-  min-height: 50vh;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: stretch;
-  gap: 40px;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 30px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  align-content: space-around;
-  }
-
-  form {
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform: translate(-50%,-50%);
-  padding: 40px 50px;
-  }
-
-  input[type=text],
-  input[type=number],
-  input[type=email],
-  input[type=password]
-  {
-  border: 0;
-  border-bottom: 1px solid #000000;
-  background: white;
-  width: 100%;
-  padding: 8px 0 5px 0;
-  font-size: 15px;
-  pointer-event:none;
-  transition: all 0.5s ease-in-out;
-  }
-
-  .container input:focus {
-  border: none;
-  outline: none;
-  border-bottom: 1px solid #e74c3c;
-  }
-
-  .container label {
-  font-family: "Poppins", sans-serif;
-  border: box-block;
-  margin-right: 10px;
-  }
-
-  .butt_login {
-  font-family: "Poppins", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 800;
-  font-style: normal;
-  width: 10vw;
-  padding: 12px 15px;
-  background-color: #920069;
-  color: #fff;
-  border: none;
-  border-radius: 30px;
-  font-weight: bold;
-  font-size: 17px;
-  cursor: pointer;
-  margin-bottom: 1em;
-  }
-
-  a {
-  text-decoration: none;
-  color: black;
-  font-family: "Poppins", sans-serif;
-  font-weight: bold;
-  text-align: center;
-  margin: 30px;
-  }
-
-  a:hover {
-  color: white;
-  }
-
-  .logo {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  width: 200px;
-  height: auto;
-  }
-
-  .subir {
-  top: -80px;
-  position: relative;
-  }
-
-   .logout {
-            text-decoration: none;
-            color: white;
-            background: #920069;
-            padding: 8px 15px;
-            border-radius: 20px;
-            transition: background 0.3s;
-        }
-
-        .logout:hover {
-            background: #740053;
-        }
-
-
-   .header {
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .user-info {
-            font-weight: 600;
-        }
-
-
-</style>
 </html>
-
