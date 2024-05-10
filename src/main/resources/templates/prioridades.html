@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração de Chamados Técnicos</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <style>
+        /* Custom CSS styles */
+        body {
+            background: linear-gradient(to bottom, #020F1F, #451776);
+            color: #000000;
+            min-height: 100vh; /* Faz o gradiente ocupar toda a tela verticalmente */
+        }
+
+
+
+
+        .main-content {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+
+
+
+        .card-body {
+            border: none; /* Remover a borda do card-body */
+        }
+
+
+
+
+        .card,
+        .col-md-6 {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #000000;
+            width: 100%; /* Define a largura dos cards */
+            max-width: 300px; /* Define a largura máxima dos cards */
+            margin-bottom: 20px; /* Espaçamento entre os cards */
+        }
+
+
+
+
+        .card-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+
+
+
+        .list-group-item {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #000000;
+        }
+
+
+
+
+        .navbar {
+            background-color: #ffffff; /* Fundo branco */
+            color: #000000; /* Texto preto */
+        }
+
+
+
+
+        /* Adicionando borda e fundo cinza claro para as divs com valores totais */
+        .valor-total {
+            border: 1px solid #dddddd;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+
+
+
+        /* Alinha os cards horizontalmente */
+        .card-columns {
+            column-count: auto;
+            column-gap: 15px; /* Espaçamento entre os cards */
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+<!-- Navbar -->
+<nav class="navbar navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">Gestão de Chamados</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Dashboard - Área do administrador</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Sair</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<!-- Page Content -->
+<div class="container mt-4 main-content">
+    <div class="row">
+        <!-- Side Menu -->
+        <div class="col-md-3">
+            <div class="list-group">
+                <a href="tela-admin.html" class="list-group-item list-group-item-action">Visão Geral</a>
+                <a href="usuarios.html" class="list-group-item list-group-item-action">Usuários</a>
+                <a href="prioridades.html" class="list-group-item list-group-item-action">Prioridades</a>
+                <a href="setores.html" class="list-group-item list-group-item-action">Setores</a>
+            </div>
+        </div>
+
+
+        <!-- Main Content -->
+        <div class="col-md-9">
+            <div class="container">
+                <div class="section">
+                    <h2>Gerenciamento de Prioridades</h2>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Técnico</th>
+                            <th>Setor</th>
+                            <th>Descrição</th>
+                            <th>Prioridade</th>
+                            <th>Data de Início</th>
+                            <th>Status</th>
+                            <th>Ação</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>João Silva</td>
+                            <td>TI</td>
+                            <td>Computador não liga</td>
+                            <td>Alta</td>
+                            <td>07/05/2024</td>
+                            <td>Em-Atendimento</td>
+                            <td>
+                                <button type="button" class="btn btn-primary"
+                                        onclick="openModal('Computador não liga', 'Alta')">Alterar Prioridade
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Maria Oliveira</td>
+                            <td>Recursos Humanos</td>
+                            <td>Solicitação de férias</td>
+                            <td>Média</td>
+                            <td>05/05/2024</td>
+                            <td>Aberto</td>
+                            <td>
+                                <button type="button" class="btn btn-primary"
+                                        onclick="openModal('Solicitação de férias', 'Média')">Alterar Prioridade
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal" id="edit-modal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar Ordem de Serviço</h5>
+                        <button type="button" class="close" onclick="closeModal()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="order-description"></p>
+                        <div class="form-group">
+                            <label for="priority-select">Prioridade:</label>
+                            <select class="form-control" id="priority-select">
+                                <option value="Urgente">Urgente</option>
+                                <option value="Alta">Alta</option>
+                                <option value="Média">Média</option>
+                                <option value="Baixa">Baixa</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">Fechar</button>
+                        <button type="button" class="btn btn-primary" onclick="saveChanges()">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <script>
+        function openModal(description, priority) {
+            $('#order-description').text('Editando: ' + description);
+            $('#priority-select').val(priority);
+            $('#edit-modal').modal('show');
+        }
+
+
+        function closeModal() {
+            $('#edit-modal').modal('hide');
+        }
+
+
+        function saveChanges() {
+            const selectedPriority = $('#priority-select').val();
+            closeModal();
+        }
+    </script>
+
+</body>
+</html>
+
+
