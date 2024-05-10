@@ -1,0 +1,116 @@
+        .container {
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .header {
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-info {
+            font-weight: 600;
+            color: #858796;
+        }
+
+        .logout {
+            text-decoration: none;
+            color: white;
+            background: #dc3545;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .logout:hover {
+            background: #b22222;
+        }
+
+        .table-container {
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table, .table th, .table td {
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            padding: 12px;
+            text-align: left;
+            background: #f2f2f2;
+        }
+
+        .table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .table tr:hover {
+            background: #ddd;
+        }
+
+        .edit-icon {
+            color: #dc3545;
+            cursor: pointer;
+            padding: 10px;
+            font-size: 18px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .modal-content {
+            width: 40%;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: black;
+        }
+
+        .close-modal {
+            background: #dc3545;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .close-modal:hover {
+            background: #b22222;
+        }
+
+        .save-modal {
+            background: #0069d9;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .save-modal:hover {
+            background: #0056b3;
+        }

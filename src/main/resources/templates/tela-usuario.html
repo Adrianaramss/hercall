@@ -1,206 +1,82 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Painel do Usuário</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap">
-
+    <meta charset="UTF-8">
+    <title>Painel do Usuário</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/telausuario.css">
 </head>
-<body>
+
+<body class="bg-gradient-primary">
 <div class="header">
-  <div class="user-info">
-    <span>Bem-vindo, João da Silva</span>
-    <span>| Matrícula: 12345</span>
-  </div>
-  <a href="/logout" class="logout">Sair</a>
+    <div class="user-info">
+        <span>Bem-vindo, João da Silva</span>
+        <span>| Matrícula: 12345</span>
+    </div>
+    <a href="/" class="logout">Sair</a>
 </div>
+
 <div class="container">
-  <form action="/tela-usuario" method="post">
-  <div class="call-card">
-    <h3>Chamado 1</h3>
-    <p><strong>Setor:</strong> TI</p>
-    <p><strong>Descrição:</strong> Computador não liga</p>
-    <p><strong>Prioridade:</strong> Alta</p>
-    <p><strong>Data de Início:</strong> 2024-05-07</p>
-  </div>
+    <div class="table-container">
+        <h2>Chamados Abertos</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Chamado</th>
+                <th>Setor</th>
+                <th>Descrição</th>
+                <th>Prioridade</th>
+                <th>Data de Início</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>Suporte</td>
+                <td>Computador não liga</td>
+                <td>Alta</td>
+                <td>2024-05-07</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Recursos Humanos</td>
+                <td>Solicitação de férias</td>
+                <td>Média</td>
+                <td>2024-05-05</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-  <div class="call-card">
-    <h3>Chamado 2</h3>
-    <p><strong>Setor:</strong> Recursos Humanos</p>
-    <p><strong>Descrição:</strong> Solicitação de férias</p>
-    <p><strong>Prioridade:</strong> Média</p>
-    <p><strong>Data de Início:</strong> 2024-05-05</p>
-  </div>
+    <div class="form-container">
+        <h2>Criar Novo Chamado</h2>
+        <form method="post" action="/criar-chamado" enctype="multipart/form-data">
+            <label for="setor">Setor:</label>
+            <select id="setor" name="setor" required>
+                <option value="">Selecione o Setor</option>
+                <option value="Suporte">Suporte</option>
+                <option value="Financeiro">Financeiro</option>
+                <option value="Marketing">Marketing</option>
+                <option value="RH">RH</option>
+                <option value="Departamento Pessoal">Departamento Pessoal</option>
+            </select>
 
-  <form method="post" action="/criar-chamado" enctype="multipart/form-data">
-    <h3>Criar Novo Chamado</h3>
-    <label para="setor">Setor:</label>
-    <select id="setor" name="setor" required>
-      <option value="">Selecione o Setor</option>
-      <option value="Suporte">Suporte</option>
-      <option value="Financeiro">Financeiro</option>
-      <option value="Marketing">Marketing</option>
-      option value="RH">RH</option>
-      <option value="Departamento Pessoal">Departamento Pessoal</option>
-    </select>
+            <label para="descricao">Descrição:</label>
+            <input type="text" id="descricao" name="descricao" placeholder="Descreva o problema" required>
 
-    <label para="descricao">Descrição:</label>
-    <input type="text" id="descricao" name="descricao" placeholder="Descreva o problema" required>
+            <label para="arquivo">Anexo:</label>
+            <input type="file" id="arquivo" name="arquivo" required>
 
-    <label para="arquivo">Anexo:</label>
-    <input type="file" id="arquivo" name="arquivo" required>
-
-
-    <input type="submit" value="Criar Chamado" class="submit-button">
-  </form>
-  </form>
+            <button class="btn btn-primary btn-user btn-block" type="submit">Criar Chamado</button>
+        </form>
+    </div>
 </div>
+
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="js/sb-admin-2.min.js"></script>
 </body>
-<style>
-  body {
-  margin: 0;
-  padding: 0;
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(#020F1F, #451776);
-  color: white;
-  }
-
-  .header {
-   background: rgba(255, 255, 255, 0.2);
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  }
-
-  .user-info {
-      font-weight: 600;
-  }
-  .logout {
-      text-decoration: none;
-      color: white;
-      background: #920069;
-      padding: 10px;
-      border-radius: 20px;
-      font-weight: 600;
-      transition: background 0.3s;
-  }
-
-  .logout:hover {
-      background: #740053;
-  }
-
-  .container {
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-  }
-
-  .call-card {
-      height: 35vh;
-      background: white;
-      color: black;
-      border-radius: 10px;
-      padding: 20px;
-      margin: 10px 0;
-      width: 50%;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      transition: box-shadow 0.3s;
-  }
-
-  .call-card:hover {
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  }
-
-  form {
-      width: 50%;
-      background: rgba(255, 255, 255, 0.2);
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  }
-
-
-
-
-  form h3 {
-      font-weight: 600;
-      text-align: center;
-  }
-
-
-
-
-  label {
-      color: white;
-      display: block;
-      margin-bottom: 10px;
-  }
-
-
-
-
-  input[type="text"], input[type="submit"], select {
-      border: none;
-      padding: 10px;
-      width: 90%;
-      border-bottom: 2px solid #920069;
-      font-size: 16px;
-      transition: border-color 0.3s;
-  }
-
-
-
-
-  input[type="text"] {
-      color: black;
-  }
-
-
-
-
-  input[type="text"]:focus, select:focus {
-      outline: none;
-      border-color: #740053;
-  }
-
-
-
-
-  input[type="file"] {
-      color: white;
-      padding: 10px;
-      border: 1px solid #920069;
-      border-radius: 10px;
-      width: 50%;
-      background: rgba(255, 255, 255, 0.2);
-      margin-bottom: 20px;
-  }
-
-
-
-
-form .submit-button {
-padding: 10px;
-background: #920069;
-color: white;
-border-radius: 10px;
-text-align: center;
-cursor: pointer;
-width: 40%;
-font-size: 12px;
-margin: 20px auto;
-display: block;
-transition: background 0.3s;
-}
-
-  select {
-      background: rgba(255, 255, 255, 0.2);
-      color: black;
-      width: 50%;
-  }
-
-</style>
 </html>
-
