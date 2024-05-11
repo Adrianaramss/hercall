@@ -2,6 +2,7 @@ package com.soulcode.hercall.services;
 
 import com.soulcode.hercall.dtos.ChamadoDto;
 import com.soulcode.hercall.dtos.SetorDto;
+import com.soulcode.hercall.enumerator.TipoPrioridade;
 import com.soulcode.hercall.models.Chamado;
 import com.soulcode.hercall.models.Setor;
 import com.soulcode.hercall.repositories.ChamadoRepository;
@@ -94,7 +95,7 @@ public class ChamadoService {
         }
     }
 
-    public ApiResponse<List<ChamadoDto>> findChamadosByPrioridade(String prioridade) {
+    public ApiResponse<List<ChamadoDto>> findChamadosByPrioridade(TipoPrioridade prioridade) {
         try {
             List<Chamado> chamados = this.chamadoRepository.findByPrioridade(prioridade);
             return new ApiResponse<>(200, "Listagem de chamados por prioridade realizada com sucesso!",

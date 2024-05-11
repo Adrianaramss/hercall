@@ -1,5 +1,6 @@
 package com.soulcode.hercall.controllers;
 import com.soulcode.hercall.dtos.ChamadoDto;
+import com.soulcode.hercall.enumerator.TipoPrioridade;
 import com.soulcode.hercall.services.ChamadoService;
 import com.soulcode.hercall.shared.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class ChamadoController {
     }
 
     @GetMapping("/chamados/por-prioridade")
-    public ApiResponse<List<ChamadoDto>> findChamadosByPrioridade(@RequestParam String prioridade) {
+    public ApiResponse<List<ChamadoDto>> findChamadosByPrioridade(@RequestParam TipoPrioridade prioridade) {
         return this.chamadoService.findChamadosByPrioridade(prioridade);
     }
 
@@ -47,9 +48,9 @@ public class ChamadoController {
     public ApiResponse<List<ChamadoDto>> findChamadosByStatus(@RequestParam String status) {
         return this.chamadoService.findChamadosByStatus(status);
     }
-
-    @PutMapping("/chamados/{id}")
-    public ApiResponse<ChamadoDto> updateChamado(@PathVariable Long id, @RequestBody ChamadoDto dto) {
-        return this.chamadoService.updateChamado(id, dto);
-    }
+//
+//    @PutMapping("/chamados/{id}")
+//    public ApiResponse<ChamadoDto> updateChamado(@PathVariable Long id, @RequestBody ChamadoDto dto) {
+//        return this.chamadoService.updateChamado(id, dto);
+//    }
 }
