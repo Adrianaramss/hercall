@@ -46,6 +46,8 @@ public class Chamado {
     @JoinColumn(name = "id_prioridade", nullable = false)
     private Prioridade prioridade;
 
+    public Chamado() {
+    }
     public Chamado(Long idChamado) {
     }
 
