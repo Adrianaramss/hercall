@@ -1,5 +1,7 @@
 package com.soulcode.hercall.dtos;
+
 import com.soulcode.hercall.models.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,25 +11,37 @@ import java.util.Date;
 
 @Getter
 @Setter
-
-
 public class ChamadoDto {
     private Long id;
+
+    @NotBlank(message = "A descrição do chamado é obrigatória")
     private String descricao;
+
     private Date data_inicio;
+
     private Date data_termino;
+
+    @NotBlank(message = "O status é obrigatório")
     private Status status;
+
+    @NotBlank(message = "O setor é obrigatório")
     private Setor setor;
+
+    @NotBlank(message = "O usuário solicitante é obrigatório")
     private Usuario solicitante;
+
     private Usuario responsavel;
+
+    @NotBlank(message = "A prioridade é obrigatória")
     private Prioridade prioridade;
 
     //construtor vazio
-    public ChamadoDto(){
+    public ChamadoDto() {
 
     }
+
     //costrutor do id
-    public ChamadoDto(Long id){
+    public ChamadoDto(Long id) {
 
     }
 
@@ -43,7 +57,7 @@ public class ChamadoDto {
         this.prioridade = chamado.getPrioridade();
     }
 
-    public static Chamado convert(ChamadoDto chamadoDto){
+    public static Chamado convert(ChamadoDto chamadoDto) {
         Chamado chamado = new Chamado(chamadoDto.id);
 
         chamado.setDescricao(chamadoDto.getDescricao());
@@ -56,9 +70,8 @@ public class ChamadoDto {
         chamado.setPrioridade(chamadoDto.getPrioridade());
         chamado.setResponsavel(chamadoDto.getResponsavel());
 
-        return  chamado;
+        return chamado;
     }
-
 
 
 }

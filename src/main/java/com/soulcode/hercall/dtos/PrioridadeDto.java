@@ -5,6 +5,7 @@ import com.soulcode.hercall.models.Prioridade;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.UniqueElements;
 
 @Getter
 @Setter

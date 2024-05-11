@@ -49,6 +49,4 @@ public class Chamado {
     public Chamado(Long idChamado) {
     }
 
-
-
 }
