@@ -1,0 +1,161 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(#020f1f, #451776);
+    color: #fff;
+}
+.top-section {
+    display: flex;
+    justify-content: space-between; /* Alinha o logo e o botão nas extremidades */
+    align-items: flex-start; /* Alinha os itens ao topo */
+    margin-bottom: 20px; /* Adiciona espaçamento abaixo da seção superior */
+}
+
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Alteração para uma disposição de coluna */
+}
+.logo {
+    width: 150px;
+    height: 150px;
+    background-image: url("/img/hercall.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+
+.button-entrar-inferior {
+    width: 100%;
+    max-width: 100px;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #920069;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+.texto-engrenagem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.engrenagem {
+    background-image: url("/img/imghomepage.png");
+    width: 450px; /* Ajustando a largura */
+    height: 450px; /* Ajustando a altura */
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-left: 20px; /* Adicionando um espaçamento à esquerda */
+}
+
+
+.container-quem-somos {
+    text-align: center;
+    margin-top: 50px;
+     background-color: rgba(255, 255, 255, 0.9);
+}
+
+.titulo {
+    margin-bottom: 30px;
+      color:  #920069;
+}
+
+
+.div-fotos-quem-somos {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.caixa-texto {
+    text-align: justify;
+    max-width: 400px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+     padding: 60px;
+}
+
+.foto {
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+}
+
+.foto1 {
+    background-image: url("/img/Karol.jpeg");
+}
+
+.foto2 {
+    background-image: url("/img/Adriana_Ramos.jpg");
+}
+
+.foto3 {
+    background-image: url("/img/Amanda_Vidal.jpg");
+}
+
+.foto4 {
+    background-image: url("/img/Daniela_Sousa.jpeg");
+}
+
+.foto5 {
+    background-image: url("/img/Jurineide.jpg");
+}
+
+.foto6 {
+    background-image: url("/img/Janete.png");
+}
+
+.legenda {
+    margin-top: 10px;
+    color:  #920069;
+}
+
+.container-footer {
+    max-width: 1400px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer-col {
+    flex: 0 1 25%;
+    max-width: 25%;
+    padding: 0 15px;
+    margin-bottom: 30px;
+}
+
+.footer-col h4 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.footer-col ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin: 10px 0;
+    font-size: 10px;
+}
+
+.footer-col ul li a {
+    text-decoration: none;
+    color: #fff;
+}

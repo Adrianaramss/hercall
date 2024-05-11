@@ -4,248 +4,70 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>homePage</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap"/>
-
+    <link rel="stylesheet" href="styles.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"/>
+    <link rel="stylesheet" href="vendor/fontawesome-free/css/index.css"/>
 </head>
 <body>
+
+
 <div class="main-container">
-    <div class="row conteudo">
-        <div class="col-md-6">
-            <div class="logo"></div>
-            <div class="caixa-texto">
-                <h1 class="titulo">Bem-vindos ao HerCall</h1>
-                <h2 class="subtitulo">
-                    Somos um sistema de chamados técnicos desenvolvido por mulheres
-                    apaixonadas por tecnologia, prontas para resolver seus problemas
-                    técnicos com um toque feminino de excelência! Com uma abordagem
-                    inclusiva e foco na qualidade do atendimento, estamos aqui para tornar
-                    sua experiência com problemas técnicos mais tranquila do que nunca.
-                    Deixe-nos cuidar dos seus problemas técnicos enquanto você relaxa!
-                </h2>
+    <div class="top-section">
+        <div class="logo">
+        </div>
+        <button class="button-entrar-inferior" onclick="window.location.href='/login'">Entrar</button>
+
+    </div>
+    <div class="texto-engrenagem">
+        <div class="caixa-texto">
+            <h1 class="titulo">Bem-vindos ao HerCall</h1>
+            <h3 class="subtitulo">
+                Somos um sistema de chamados técnicos desenvolvido por mulheres
+                apaixonadas por tecnologia.<br> <br>Estamos prontas para resolver seus problemas
+                técnicos.<br> <br> Trabalhamos com uma abordagem inclusiva focada em resolução e qualidade.
+
+            </h3>
+        </div>
+        <div class="engrenagem"></div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container-quem-somos">
+        <h1 class="titulo">Nosso time desenvolvedoras</h1>
+        <div class="div-fotos-quem-somos">
+            <div class="foto-container">
+                <div class="foto foto1"></div>
+                <p class="legenda">Anna Karoline Nunes</p>
             </div>
-            <button class="button-entrar-inferior" onclick="window.location.href='/login'">Entrar</button>
-        </div>
-        <div class="conteudo-direito">
-            <div class="img-engrenagem"></div>
 
-        </div>
+            <div class="foto-container">
+                <div class="foto foto2"></div>
+                <p class="legenda">Adriana Ramos</p>
+            </div>
 
-        <div class="container-quem-somos">
-            <h1 class="titulo-desenvolvedoras">Desenvolvedoras:</h1>
-            <div class="div-fotos-quem-somos">
-                <div>
-                    <div class="foto1"></div>
-                    <p class="legenda">Anna Karoline Nunes</p>
-                </div>
+            <div class="foto-container">
+                <div class="foto foto3"></div>
+                <p class="legenda">Amanda Vidal</p>
+            </div>
 
-                <div>
-                    <div class="foto2"></div>
-                    <p class="legenda">Adriana Ramos</p>
-                </div>
+            <div class="foto-container">
+                <div class="foto foto4"></div>
+                <p class="legenda">Daniela Sousa</p>
+            </div>
 
-                <div>
-                    <div class="foto3"></div>
-                    <p class="legenda">Amanda Vidal</p>
-                </div>
-
-                <div>
-                    <div class="foto4"></div>
-                    <p class="legenda">Daniela Sousa</p>
-                </div>
-
-                <div>
-                    <div class="foto5"></div>
-                    <p class="legenda">Jurineide Souza</p>
-                </div>
-
-                <div>
-                    <div class="foto6"></div>
-                    <p class="legenda">Janete Souza</p>
-                </div>
+            <div class="foto-container">
+                <div class="foto foto5"></div>
+                <p class="legenda">Jurineide Souza</p>
+            </div>
+            <div class="foto-container">
+                <div class="foto foto6"></div>
+                <p class="legenda">Janete Souza</p>
             </div>
 
         </div>
     </div>
+
+</footer>
 </body>
-<style>
-    html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-    }
-    .main-container {
-        background: linear-gradient(#020f1f, #451776);
-        position: relative;
-        overflow: hidden;
-    }
-
-    @keyframes typing {
-    0% {
-        width: 0;
-    }
-    100% {
-        width: 100%;
-    }
-}
-@keyframes blink-caret {
-    50% {
-        border-color: transparent;
-    }
-}
-    .logo {
-        width: 131px;
-        height: 111px;
-        background-position: center;
-        background-image: url("img/hercall.png");
-        background-size: cover;
-        background-repeat: no-repeat;
-        position: absolute;
-        top: 48px;
-        left: 35px;
-        z-index: 16;
-    }
-    .container-quem-somos {
-        max-width: 100%;
-        height: 455px;
-        font-size: 0;
-        background-color: #f8f8f8;
-        position: relative;
-        overflow: visible auto;
-        margin: 960px 0 0 0;
-    }
-    .titulo {
-        display: flex;
-        height: 60px;
-        justify-content: flex-start;
-        align-items: flex-start;
-        font-family: "Poppins", sans-serif;
-        font-size: 36px;
-        font-weight: 600;
-        line-height: 54px;
-        color: #ffffff;
-        position: absolute;
-        top: 159px;
-        left: 205px;
-        text-align: left;
-        white-space: nowrap;
-        z-index: 22;
-        animation: typing 4s steps(30, end) infinite, blink-caret 0.75s step-end infinite;
-    }
-    .subtitulo {
-        display: flex;
-        width: 457px;
-        height: 320px;
-        align-items: flex-start;
-        font-family: "Poppins", sans-serif;
-        font-size: 20px;
-        font-weight: 500;
-        line-height: 30px;
-        color: #ffffff;
-        position: absolute;
-        top: 239px;
-        left: 205px;
-        text-align: justified;
-        z-index: 1;
-    }
-    .img-engrenagem {
-        width: 663px;
-        height: 650px;
-        background-position: center;
-        background-image: url("img/engrenagem.png");
-        background-size: cover;
-        background-repeat: no-repeat;
-        position: absolute;
-        top: 189px;
-        left: 850px;
-        z-index: 23;
-    }
-    .titulo-desenvolvedoras {
-        display: flex;
-        width: 100%;
-        height: 62px;
-        justify-content: center;
-        align-items: flex-start;
-        font-family: "Poppins", sans-serif;
-        font-size: 36px;
-        font-weight: 600;
-        line-height: 54px;
-        color: #000000;
-        position: relative;
-        text-align: center;
-        white-space: nowrap;
-        z-index: 9;
-        margin: 44px 0 0 0;
-    }
-    .div-fotos-quem-somos {
-        display: flex;
-        width: calc(100% - 212px);
-        height: 151.034px;
-        justify-content: space-between;
-        align-items: center;
-        position: relative;
-        z-index: 18;
-        margin: 52px 0 0 100px; /* Ajuste para mover as fotos um pouco mais para a esquerda */
-    }
-    .foto1, .foto2, .foto3, .foto4, .foto5, .foto6 {
-        width: 146px;
-        height: 150px;
-        flex-shrink: 0;
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        position: relative;
-        z-index: 6;
-    }
-    .foto1 { background-image: url("img/Karol.jpeg"); border-radius: 73px; }
-    .foto2 { background-image: url("img/Adriana_Ramos.jpg"); border-radius: 79px; }
-    .foto3 { background-image: url("img/Amanda_Vidal.jpg"); border-radius: 79.5px; }
-    .foto4 { background-image: url("img/Daniela_Sousa.jpeg"); border-radius: 83px; }
-    .foto5 { background-image: url("img/Jurineide.jpg"); border-radius: 72.039px; }
-    .foto6 { background-image: url("img/Janete.png"); border-radius: 73px; }
-
-    .button-entrar-superior {
-        width: 150px;
-        height: 55px;
-        color:white;
-        background-color: #920069;
-        border-radius: 5px;
-        position: absolute;
-        top: 50px;
-        left: 1400px;
-        z-index: 20;
-        font-family: "Poppins", sans-serif;
-        padding: 15px 30px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    .button-entrar-inferior {
-        width: 457px;
-        height: 66.531px;
-        background-color: #ffffff;
-        border-radius: 5px;
-        position: absolute;
-        top: 621.469px;
-        left: 205px;
-        z-index: 3;
-        font-family: "Poppins", sans-serif;
-        color: black;
-        padding: 20px 200px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: large;
-        }
-
-    .legenda {
-        display: flex;
-        justify-content: center;
-        font-family: "Poppins", sans-serif;
-        font-size: 12px;
-        font-weight: 600;
-        line-height: 18px;
-        color: #000000;
-        white-space: nowrap;
-    }
-</style>
 </html>
