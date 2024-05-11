@@ -94,4 +94,39 @@ public class ChamadoService {
         }
     }
 
+    public ApiResponse<List<ChamadoDto>> findChamadosByPrioridade(String prioridade) {
+        try {
+            List<Chamado> chamados = this.chamadoRepository.findByPrioridade(prioridade);
+            return new ApiResponse<>(200, "Listagem de chamados por prioridade realizada com sucesso!",
+                    chamados.stream().map(ChamadoDto::new).collect(Collectors.toList()));
+        } catch (Exception e) {
+            return new ApiResponse<>(500, e.getMessage(), null);
+        }
+    }
+
+    public ApiResponse<List<ChamadoDto>> findChamadosByStatus(String status) {
+        try {
+            List<Chamado> chamados = this.chamadoRepository.findByStatus(status);
+            return new ApiResponse<>(200, "Listagem de chamados por status realizada com sucesso!",
+                    chamados.stream().map(ChamadoDto::new).collect(Collectors.toList()));
+        } catch (Exception e) {
+            return new ApiResponse<>(500, e.getMessage(), null);
+        }
+    }
+
+    public ApiResponse<ChamadoDto> updateChamado(Long id, ChamadoDto dto) {
+        try {
+            ApiResponse<ChamadoDto> chamadoExistente = findById(id);
+            if (chamadoExistente.getStatus() != 200) {
+                return new ApiResponse<>(404, "Chamado não encontrado!", null);
+            }
+            Chamado chamado = ChamadoDto.convert(dto);
+            chamado.setId(id);
+            chamado = this.chamadoRepository.save(chamado);
+            return new ApiResponse<>(200, "Chamado atualizado com sucesso!", new ChamadoDto(chamado));
+        } catch (Exception e) {
+            return new ApiResponse<>(500, e.getMessage(), null);
+        }
+    }
+
 }

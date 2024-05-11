@@ -38,4 +38,18 @@ public class ChamadoController {
         return this.chamadoService.deleteById(id);
     }
 
+    @GetMapping("/chamados/por-prioridade")
+    public ApiResponse<List<ChamadoDto>> findChamadosByPrioridade(@RequestParam String prioridade) {
+        return this.chamadoService.findChamadosByPrioridade(prioridade);
+    }
+
+    @GetMapping("/chamados/por-status")
+    public ApiResponse<List<ChamadoDto>> findChamadosByStatus(@RequestParam String status) {
+        return this.chamadoService.findChamadosByStatus(status);
+    }
+
+    @PutMapping("/chamados/{id}")
+    public ApiResponse<ChamadoDto> updateChamado(@PathVariable Long id, @RequestBody ChamadoDto dto) {
+        return this.chamadoService.updateChamado(id, dto);
+    }
 }
