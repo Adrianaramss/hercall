@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Painel do Usuário</title>
@@ -20,7 +20,7 @@
 
 <div class="container">
     <div class="table-container">
-        <h2>Chamados Abertos</h2>
+        <h2>Chamados</h2>
         <table class="table">
             <thead>
             <tr>
@@ -29,22 +29,20 @@
                 <th>Descrição</th>
                 <th>Prioridade</th>
                 <th>Data de Início</th>
+                <th>Data de Término</th>
+                <th>Status</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>Suporte</td>
-                <td>Computador não liga</td>
-                <td>Alta</td>
-                <td>2024-05-07</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Recursos Humanos</td>
-                <td>Solicitação de férias</td>
-                <td>Média</td>
-                <td>2024-05-05</td>
+            <tr th:each="chamado:${chamadosAbertos}">
+                <td th:text="*{chamado.id}"></td>
+                <td th:text="*{chamado.setor.tipoSetor}"></td>
+                <td th:text="*{chamado.descricao}"></td>
+                <td th:text="${chamado.prioridade != null} ? ${#strings.toUpperCase(chamado.prioridade.tipoPrioridade)} : 'Prioridade não definida'"></td>
+<!--                <td th:text="*{chamado.prioridade.tipoPrioridade}"></td>-->
+                <td th:text="*{chamado.data_inicio}"></td>
+                <td th:text="*{chamado.data_termino}"></td>
+                <td th:text="*{chamado.status.nome}"></td>
             </tr>
             </tbody>
         </table>
@@ -52,25 +50,29 @@
 
     <div class="form-container">
         <h2>Criar Novo Chamado</h2>
-        <form method="post" action="/criar-chamado" enctype="multipart/form-data">
+        <form method="post" action="/chamados">
             <label for="setor">Setor:</label>
             <select id="setor" name="setor" required>
                 <option value="">Selecione o Setor</option>
-                <option value="Suporte">Suporte</option>
-                <option value="Financeiro">Financeiro</option>
-                <option value="Marketing">Marketing</option>
-                <option value="RH">RH</option>
-                <option value="Departamento Pessoal">Departamento Pessoal</option>
+                <option th:each="option : ${setores}" th:value="${option.id_setor}" th:text="${option.tipoSetor}"></option>
             </select>
 
             <label for="descricao">Descrição:</label>
             <input type="text" id="descricao" name="descricao" placeholder="Descreva o problema" required>
 
-            <label for="arquivo">Anexo:</label>
-            <input type="file" id="arquivo" name="arquivo" required>
+<!--            <label for="arquivo">Anexo:</label>-->
+<!--            <input type="file" id="arquivo" name="arquivo" required>-->
 
             <button class="btn btn-primary btn-user btn-block" type="submit">Criar Chamado</button>
         </form>
+        <div th:if="${statusChamado}" onload="showModal([[${mensagem}]]);"></div>
+
+        <script>
+            function showModal(message) {
+                alert(message);
+                // Aqui você pode adicionar o código para exibir uma modal
+            }
+        </script>
     </div>
 </div>
 
