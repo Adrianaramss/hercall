@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -17,22 +19,20 @@ public class ChamadoDto {
     @NotBlank(message = "A descrição do chamado é obrigatória")
     private String descricao;
 
-    private Date data_inicio;
+    private LocalDate data_inicio;
 
-    private Date data_termino;
+    private LocalDate data_termino;
 
-    @NotBlank(message = "O status é obrigatório")
     private Status status;
 
     @NotBlank(message = "O setor é obrigatório")
     private Setor setor;
 
-    @NotBlank(message = "O usuário solicitante é obrigatório")
+    //@NotBlank(message = "O usuário solicitante é obrigatório")
     private Usuario solicitante;
 
     private Usuario responsavel;
 
-    @NotBlank(message = "A prioridade é obrigatória")
     private Prioridade prioridade;
 
     //construtor vazio

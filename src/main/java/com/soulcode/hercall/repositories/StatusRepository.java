@@ -5,6 +5,8 @@ import com.soulcode.hercall.models.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Optional;
+
 public interface StatusRepository extends JpaRepository<Status, Long> {
 
     @Query("SELECT COUNT(s) > 0 FROM Status s WHERE s.nome = :nome")
@@ -15,4 +17,6 @@ public interface StatusRepository extends JpaRepository<Status, Long> {
 
     @Query("SELECT COUNT(c) > 0 FROM Chamado c WHERE c.status.id_status = :idStatus")
     boolean existChamadoByIdStatus(Long idStatus);
+
+    Optional<Status> findByNome(String nome);
 }

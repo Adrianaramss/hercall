@@ -5,11 +5,15 @@ import com.soulcode.hercall.dtos.SetorDto;
 import com.soulcode.hercall.enumerator.TipoPrioridade;
 import com.soulcode.hercall.models.Chamado;
 import com.soulcode.hercall.models.Setor;
+import com.soulcode.hercall.models.Status;
 import com.soulcode.hercall.repositories.ChamadoRepository;
+import com.soulcode.hercall.repositories.StatusRepository;
 import com.soulcode.hercall.shared.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,10 +24,22 @@ public class ChamadoService {
     @Autowired
     ChamadoRepository chamadoRepository;
 
+    @Autowired
+    StatusRepository statusRepository;
+
     public ApiResponse<ChamadoDto> save(ChamadoDto dto) {
         try {
+            dto.setData_inicio(LocalDate.now());
+            Optional<Status> statusAberto = statusRepository.findByNome("Aberto");
+            if (statusAberto.isEmpty()) {
+                return new ApiResponse<>(400, "O Administrador não cadastrou um status 'Aberto'!", null);
+            } else {
+                dto.setStatus(statusAberto.get());
+            }
+            //Definir Usuario Solicitante por Security
             Chamado chamado = ChamadoDto.convert(dto);
             chamado = this.chamadoRepository.save(chamado);
+
 
             return new ApiResponse<>(201, "Chamado cadastrado com sucesso!", new ChamadoDto(chamado));
         } catch (Exception e) {
@@ -60,7 +76,7 @@ public class ChamadoService {
                 return new ApiResponse<>(404, "Não é possível editar, pois chamado não foi encontrado por ID!", null);
             }
 
-            if(existeChamado.getData().getStatus().getNome().equalsIgnoreCase("finalizado")) {
+            if (existeChamado.getData().getStatus().getNome().equalsIgnoreCase("finalizado")) {
                 return new ApiResponse<>(400, "Não é possível editar, pois chamado já foi finalizado!", null);
             }
 

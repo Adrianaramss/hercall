@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -15,14 +17,14 @@ public class Chamado {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String descricao;
 
     @Column
-    private Date data_inicio;
+    private LocalDate data_inicio;
 
     @Column
-    private  Date data_termino;
+    private  LocalDate data_termino;
 
     @ManyToOne
     @JoinColumn (name = "id_status", nullable = false)
@@ -34,16 +36,16 @@ public class Chamado {
 
 
     @ManyToOne
-    @JoinColumn(name = "id_solicitante", nullable = false)
+    @JoinColumn(name = "id_solicitante")
     private Usuario solicitante;
 
 
     @ManyToOne
-    @JoinColumn(name = "id_responsavel", nullable = false)
+    @JoinColumn(name = "id_responsavel")
     private Usuario responsavel;
 
     @ManyToOne
-    @JoinColumn(name = "id_prioridade", nullable = false)
+    @JoinColumn(name = "id_prioridade")
     private Prioridade prioridade;
 
     public Chamado() {
