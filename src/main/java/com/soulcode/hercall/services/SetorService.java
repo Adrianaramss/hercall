@@ -26,7 +26,7 @@ public class SetorService {
             Setor setor = SetorDto.convert(dto);
             setor = this.setorRepository.save(setor);
 
-            return new ApiResponse<>(201, "Setor cadastrada com sucesso!", new SetorDto(setor));
+            return new ApiResponse<>(201, "Setor cadastrado com sucesso!", new SetorDto(setor));
         } catch (Exception e) {
             return new ApiResponse<>(500, e.getMessage(), null);
         }

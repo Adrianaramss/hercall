@@ -16,25 +16,32 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String nome;
 
-    @Column (unique = true, nullable = false  )
+    @Column (unique = true, nullable = false)
     private String  email;
 
     @Column (nullable = false)
     private String senha;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipo_usuario;
 
-    @Column
+    @Column (unique = true, nullable = false)
     private String matricula;
+
+    @OneToMany(mappedBy = "responsavel", cascade = CascadeType.ALL)
+    private List<Chamado> chamadoListResponsavel = new ArrayList<>();
+
+    @OneToMany(mappedBy = "solicitante", cascade = CascadeType.ALL)
+    private List<Chamado> chamadoListSolicitante = new ArrayList<>();
 
     public Usuario(Long idUsuario) {
     }
