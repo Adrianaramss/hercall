@@ -1,6 +1,7 @@
 package com.soulcode.hercall.repositories;
 
 import com.soulcode.hercall.enumerator.TipoSetor;
+import com.soulcode.hercall.enumerator.TipoStatus;
 import com.soulcode.hercall.models.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,4 +20,5 @@ public interface StatusRepository extends JpaRepository<Status, Long> {
     boolean existChamadoByIdStatus(Long idStatus);
 
     Optional<Status> findByNome(String nome);
+
 }

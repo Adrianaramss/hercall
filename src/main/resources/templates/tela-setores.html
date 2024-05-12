@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,33 +54,27 @@
           <H3>Setores</H3>
             <div class="row">
                 <div class="col-md-6">
-                    <form id="addDepartmentForm">
+                    <form id="addDepartmentForm" action="/setores" method="post">
                         <div class="form-group">
                             <label for="newDepartment">Adicionar Setor:</label>
-                            <input type="text" class="form-control" id="newDepartment" placeholder="Digite o nome do novo setor">
+                            <input type="text" class="form-control" id="newDepartment" name="tipoSetor" placeholder="Digite o nome do novo setor">
                         </div>
                         <button type="submit" class="btn btn-success">Adicionar Setor</button>
                     </form>
                 </div>
                 <div class="col-md-6">
-                    <form id="deleteDepartmentForm">
+                    <form id="deleteDepartmentForm" action="/delete-setor-por-nome" method="post">
                         <div class="form-group">
                             <label for="departmentName">Excluir Setor:</label>
-                            <input type="text" class="form-control" id="departmentName" placeholder="Digite o nome do setor a excluir">
+                            <input type="text" class="form-control" id="departmentName" name="tipoSetor" placeholder="Digite o nome do setor a excluir">
                         </div>
                         <button type="submit" class="btn btn-danger">Excluir Setor</button>
                     </form>
                 </div>
             </div>
-
-            <!-- Lista de setores -->
             <label for="newDepartment">Setores Ativos no momento:</label>
-            <ul class="departments mt-4">
-                <li>Suporte</li>
-                <li>Financeiro</li>
-                <li>Marketing</li>
-                <li>RH</li>
-                <li>Departamento Pessoal</li>
+            <ul class="departments mt-2" th:each="setor:${setores}">
+                <li th:text="*{setor.tipoSetor}"></li>
             </ul>
         </div>
     </div>

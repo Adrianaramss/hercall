@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface SetorRepository extends JpaRepository<Setor, Long> {
 
@@ -17,4 +19,7 @@ public interface SetorRepository extends JpaRepository<Setor, Long> {
 
     @Query("SELECT COUNT(c) > 0 FROM Chamado c WHERE c.setor.id_setor = :idSetor")
     boolean existChamadoByIdSetor(Long idSetor);
+
+    @Query("SELECT s FROM Setor s WHERE s.tipoSetor = :tipoSetor")
+    Optional<Setor> findSetorByTipoSetor(TipoSetor tipoSetor);
 }
