@@ -30,40 +30,40 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Cadastro do usuário</h1>
                         </div>
-                        <form th:action="@{/usuarios}" method="post">
+                        <form action="/usuarios" method="post">
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label for="exampleFirstName"></label>
-                                    <input type="text" class="form-control form-control-user" id="exampleFirstName" name="nome"
+                                    <label for="nome"></label>
+                                    <input type="text" class="form-control form-control-user" id="nome" name="nome"
                                                                                  placeholder="Nome" required>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="exampleMatricula"></label>
-                                    <input type="text" class="form-control form-control-user" id="exampleMatricula" name="matricula"
+                                    <label for="matricula"></label>
+                                    <input type="text" class="form-control form-control-user" id="matricula" name="matricula"
                                                                                  placeholder="Matrícula" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail"></label>
-                                <input type="email" class="form-control form-control-user" id="exampleInputEmail" name="email"
+                                <label for="email"></label>
+                                <input type="email" class="form-control form-control-user" id="email" name="email"
                                        placeholder="Email" required>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <input type="password" class="form-control form-control-user" name="senha"
-                                           id="exampleInputPassword" placeholder="Senha" required>
+                                           id="senha" placeholder="Senha" required>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="password" class="form-control form-control-user" name="confirma-senha"
-                                           id="exampleRepeatPassword" placeholder="Confirme a senha">
+                                    <input type="password" class="form-control form-control-user" name="confirmaSenha"
+                                           id="confirmaSenha" placeholder="Confirme a senha">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Tipo de usuário:</label>
                                 <label for="tecnico"> Técnico </label>
-                                <input type="radio" name="tipo" value="tecnico" id="tecnico">
+                                <input type="radio" name="tipoUsuario" value="TECNICO" id="tecnico">
                                 <label for="usuario"> Usuário </label>
-                                <input type="radio" name="tipo" value="usuario" id="usuario">
+                                <input type="radio" name="tipoUsuario" value="FUNCIONARIO" id="usuario">
                             </div>
                             <button class="btn btn-primary btn-user btn-block" type="submit" id="submit_button">Cadastrar</button>
                         </form>
