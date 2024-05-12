@@ -44,10 +44,10 @@
                 <td th:text="${chamado.prioridade != null} ? ${#strings.toUpperCase(chamado.prioridade.tipoPrioridade)} : 'Prioridade não definida'"></td>
                 <td th:text="*{chamado.data_inicio}"></td>
                 <td th:text="*{chamado.data_termino}"></td>
-                <td th:text="*{chamado.status.nome}"></td>
+                <td th:text="*{chamado.status}"></td>
                 <td>
                     <span class="edit-icon" onclick="openModal(this)"
-                          th:attr="data-id=${chamado.id}, data-status=${chamado.status.id_status}">✏️</span>
+                          th:attr="data-id=${chamado.id}, data-status='${chamado.status}'">✏️</span>
                 </td>
             </tr>
             </tbody>
@@ -60,11 +60,10 @@
         <h3>Editar Chamado Técnico</h3>
         <form action="#" th:action="@{/chamados/{id}{id=${chamado-id}}}" th:method="patch">
 
-
         <label for="status-select">Status:</label>
         <select id="status-select" name="status" required>
             <option value="">Selecione o Status</option>
-            <option th:each="option : ${statusList}" th:value="${option.id_status}" th:text="${option.nome}"></option>
+            <option th:each="option : ${statusList}" th:value="${option}" th:text="${option}"></option>
         </select>
 
         <label for="priority-select">Prioridade:</label>

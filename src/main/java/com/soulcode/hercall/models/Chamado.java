@@ -1,6 +1,7 @@
 package com.soulcode.hercall.models;
 
 
+import com.soulcode.hercall.enumerator.TipoStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,16 +25,15 @@ public class Chamado {
     private LocalDate data_inicio;
 
     @Column
-    private  LocalDate data_termino;
+    private LocalDate data_termino;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TipoStatus status;
 
     @ManyToOne
-    @JoinColumn (name = "id_status", nullable = false)
-    private  Status status;
-
-    @ManyToOne
-    @JoinColumn (name = "id_setor", nullable = false)
+    @JoinColumn(name = "id_setor", nullable = false)
     private Setor setor;
-
 
     @ManyToOne
     @JoinColumn(name = "id_solicitante")
@@ -50,7 +50,9 @@ public class Chamado {
 
     public Chamado() {
     }
+
     public Chamado(Long idChamado) {
+        this.id = idChamado;
     }
 
 }

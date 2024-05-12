@@ -41,10 +41,9 @@
                 <td th:text="*{chamado.setor.tipoSetor}"></td>
                 <td th:text="*{chamado.descricao}"></td>
                 <td th:text="${chamado.prioridade != null} ? ${#strings.toUpperCase(chamado.prioridade.tipoPrioridade)} : 'Prioridade não definida'"></td>
-                <!--                <td th:text="*{chamado.prioridade.tipoPrioridade}"></td>-->
                 <td th:text="*{chamado.data_inicio}"></td>
                 <td th:text="*{chamado.data_termino}"></td>
-                <td th:text="*{chamado.status.nome}"></td>
+                <td th:text="*{chamado.status}"></td>
             </tr>
             </tbody>
         </table>
@@ -53,21 +52,15 @@
 
     <div class="form-container">
         <h2>Criar Novo Chamado</h2>
-        <form method="post" action="/chamados" onsubmit="showModal()">
+        <form method="post" action="/cadastra-chamado" onsubmit="showModal()">
             <label for="setor">Setor:</label>
             <select id="setor" name="setor" required>
                 <option value="">Selecione o Setor</option>
                 <option th:each="option : ${setores}" th:value="${option.id_setor}" th:text="${option.tipoSetor}"></option>
             </select>
 
-
             <label for="descricao">Descrição:</label>
             <input type="text" id="descricao" name="descricao" placeholder="Descreva o problema" required>
-
-
-            <!--            <label for="arquivo">Anexo:</label>-->
-            <!--            <input type="file" id="arquivo" name="arquivo" required>-->
-
 
             <button class="btn btn-primary btn-user btn-block" type="submit">Criar Chamado</button>
         </form>

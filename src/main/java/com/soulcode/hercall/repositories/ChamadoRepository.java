@@ -1,6 +1,6 @@
 package com.soulcode.hercall.repositories;
 
-import com.soulcode.hercall.enumerator.TipoPrioridade;
+import com.soulcode.hercall.enumerator.TipoStatus;
 import com.soulcode.hercall.models.Chamado;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,11 +14,11 @@ public interface ChamadoRepository extends JpaRepository<Chamado, Long> {
     @Query("SELECT COUNT(c) > 0 FROM Chamado c WHERE c.id =:id AND c.responsavel.id IS NOT NULL")
     boolean existChamadoComReponsavel(Long id);
 
-    @Query("SELECT c FROM Chamado c WHERE c.prioridade.tipoPrioridade = :prioridade")
-    List<Chamado> findByPrioridade(TipoPrioridade prioridade);
+    @Query("SELECT c FROM Chamado c WHERE c.prioridade.tipoPrioridade = :tipoPrioridade")
+    List<Chamado> findByTipoPrioridade(String tipoPrioridade);
 
-    @Query("SELECT c FROM Chamado c WHERE c.status.nome = :status")
-    List<Chamado> findByStatus(String status);
+    @Query("SELECT c FROM Chamado c WHERE c.status = :status")
+    List<Chamado> findByStatus(TipoStatus status);
 
     @Query(value = "SELECT " +
             "SUM(CASE WHEN MONTH(data_inicio) = 1 THEN 1 ELSE 0 END) AS janeiro, " +
@@ -36,14 +36,14 @@ public interface ChamadoRepository extends JpaRepository<Chamado, Long> {
             "FROM chamado " +
             "WHERE YEAR(data_inicio) = YEAR(CURRENT_DATE())",
             nativeQuery = true)
-    List<Object[]> contarChamadosPorMes();
+    List<Object[]> countChamadosByMes();
 
     @Query(value = "SELECT " +
-            "SUM(CASE WHEN id_status <> 5 AND id_status <> 4 THEN 1 ELSE 0 END) AS chamadosAbertos, " +
-            "SUM(CASE WHEN id_status = 2 THEN 1 ELSE 0 END) AS chamadosEmAtendimento, " +
-            "SUM(CASE WHEN id_status = 5 THEN 1 ELSE 0 END) AS chamadosFinalizados " +
+            "SUM(CASE WHEN status <> 'FINALIZADO' AND status <> 'CANCELADO' THEN 1 ELSE 0 END) AS chamadosAbertos, " +
+            "SUM(CASE WHEN status = 'EM_ATENDIMENTO' THEN 1 ELSE 0 END) AS chamadosEmAtendimento, " +
+            "SUM(CASE WHEN status = 'FINALIZADO' THEN 1 ELSE 0 END) AS chamadosFinalizados " +
             "FROM chamado", nativeQuery = true
     )
-    List<Object[]> contarChamadosPorStatus();
+    List<Object[]> countChamadosByStatus();
 
 }

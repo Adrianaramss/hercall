@@ -18,13 +18,13 @@ import org.hibernate.validator.constraints.Length;
 public class UsuarioDto {
     private Long id;
 
-    @NotBlank(message = "O nome do usuário é obrigatório")
+    @NotBlank(message = "O nome é obrigatório")
     private String nome;
 
-    @NotBlank(message = "O email do usuário é obrigatório")
+    @NotBlank(message = "O email é obrigatório")
     private String email;
 
-    @NotBlank(message = "A matrícula do usuário é obrigatório")
+    @NotBlank(message = "A matrícula é obrigatóra")
     private String matricula;
 
     @NotBlank(message = "A senha é obrigatória")
@@ -44,7 +44,7 @@ public class UsuarioDto {
         this.tipoUsuario = usuario.getTipo_usuario();
     }
 
-    public static Usuario convert(UsuarioDto usuarioDto){
+    public static Usuario convert(UsuarioDto usuarioDto) {
         Usuario usuario = new Usuario(usuarioDto.getId());
 
         usuario.setEmail(usuarioDto.getEmail());
@@ -53,7 +53,7 @@ public class UsuarioDto {
         usuario.setId(usuarioDto.getId());
         usuario.setMatricula(usuarioDto.getMatricula());
         usuario.setSenha(usuarioDto.getSenha());
-        return  usuario;
+        return usuario;
     }
 
 }

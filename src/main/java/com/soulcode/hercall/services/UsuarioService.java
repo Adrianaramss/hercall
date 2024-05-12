@@ -1,6 +1,5 @@
 package com.soulcode.hercall.services;
 
-
 import com.soulcode.hercall.dtos.UsuarioDto;
 import com.soulcode.hercall.models.Usuario;
 import com.soulcode.hercall.repositories.UsuarioRepository;
@@ -20,12 +19,12 @@ public class UsuarioService {
 
     public ApiResponse<UsuarioDto> save(UsuarioDto dto) {
         try {
-            if(!Objects.equals(dto.getSenha(), dto.getConfirmaSenha())) {
-                return new ApiResponse<>(400, "As senhas digitadas não coincidem. Por favor, verifique e tente novamente", null);
-            }
-
             if (usuarioRepository.existByEmail(dto.getEmail())) {
                 return new ApiResponse<>(409, "Já existe outro usuário com esse email!", null);
+            }
+
+            if (!Objects.equals(dto.getSenha(), dto.getConfirmaSenha())) {
+                return new ApiResponse<>(400, "As senhas digitadas não coincidem. Por favor, verifique e tente novamente", null);
             }
 
             Usuario usuario = UsuarioDto.convert(dto);
