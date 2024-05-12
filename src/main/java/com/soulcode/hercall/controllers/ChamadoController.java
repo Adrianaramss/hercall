@@ -36,8 +36,8 @@ public class ChamadoController {
         return this.chamadoService.findById(id);
     }
 
-    @PutMapping("/chamados/{id}")
-    public ApiResponse<ChamadoDto> updateById(@PathVariable Long id, @RequestBody ChamadoDto dto){
+    @PatchMapping("/chamados/{id}")
+    public ApiResponse<ChamadoDto> updateById(@PathVariable Long id, @ModelAttribute ChamadoDto dto){
         return this.chamadoService.updateById(id, dto);
     }
 

@@ -1,17 +1,13 @@
 package com.soulcode.hercall.controllers;
 
-import com.soulcode.hercall.dtos.ChamadoDto;
-import com.soulcode.hercall.dtos.SetorDto;
-import com.soulcode.hercall.dtos.UsuarioDto;
+import com.soulcode.hercall.dtos.*;
 import com.soulcode.hercall.repositories.ChamadoRepository;
-import com.soulcode.hercall.services.SetorService;
-import com.soulcode.hercall.services.UsuarioService;
+import com.soulcode.hercall.services.*;
 import com.soulcode.hercall.shared.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.soulcode.hercall.services.ChamadoService;
 import com.soulcode.hercall.models.Chamado;
 import java.util.List;
 
@@ -25,6 +21,12 @@ public class UsuarioController {
 
     @Autowired
     private SetorService setorService;
+
+    @Autowired
+    private StatusService statusService;
+
+    @Autowired
+    private PrioridadeService prioridadeService;
 
     @PostMapping("/usuarios")
     public ApiResponse<UsuarioDto> save(@RequestBody UsuarioDto dto) {
@@ -71,7 +73,13 @@ public class UsuarioController {
     }
 
     @GetMapping("/tela-tecnico")
-    public String telaTecnico() {
+    public String telaTecnico(Model model) {
+        List<ChamadoDto> listarChamado = chamadoService.findAll().getData();
+        model.addAttribute("chamados", listarChamado);
+        List<StatusDto> listarStatus = statusService.findAll().getData();
+        model.addAttribute("statusList", listarStatus);
+        List<PrioridadeDto> listarPrioridade = prioridadeService.findAll().getData();
+        model.addAttribute("prioridades", listarPrioridade);
         return "tela-tecnico";
     }
 

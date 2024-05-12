@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Painel Técnico</title>
@@ -31,31 +31,23 @@
                 <th>Descrição</th>
                 <th>Prioridade</th>
                 <th>Data de Início</th>
+                <th>Data de Término</th>
                 <th>Status</th>
                 <th>Ação</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>Suporte</td>
-                <td>Computador não liga</td>
-                <td>Alta</td>
-                <td>07/05/2024</td>
-                <td>Em Andamento</td>
+            <tr th:each="chamado:${chamados}">
+                <td th:text="*{chamado.id}"></td>
+                <td th:text="*{chamado.setor.tipoSetor}"></td>
+                <td th:text="*{chamado.descricao}"></td>
+                <td th:text="${chamado.prioridade != null} ? ${#strings.toUpperCase(chamado.prioridade.tipoPrioridade)} : 'Prioridade não definida'"></td>
+                <td th:text="*{chamado.data_inicio}"></td>
+                <td th:text="*{chamado.data_termino}"></td>
+                <td th:text="*{chamado.status.nome}"></td>
                 <td>
-                    <span class="edit-icon" onclick="openModal('Computador não liga', 'Em andamento')">✏️</span>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Recursos Humanos</td>
-                <td>Solicitação de férias</td>
-                <td>Média</td>
-                <td>05/05/2024</td>
-                <td>Aberto</td>
-                <td>
-                    <span class="edit-icon" onclick="openModal('Solicitação de férias', 'Aberto')">✏️</span>
+                    <span class="edit-icon" onclick="openModal(this)"
+                          th:attr="data-id=${chamado.id}, data-status=${chamado.status.id_status}">✏️</span>
                 </td>
             </tr>
             </tbody>
@@ -66,35 +58,43 @@
 <div class="modal" id="edit-modal">
     <div class="modal-content">
         <h3>Editar Chamado Técnico</h3>
+        <form action="#" th:action="@{/chamados/{id}{id=${chamado-id}}}" th:method="patch">
+
 
         <label for="status-select">Status:</label>
-        <select id="status-select" class="form-control">
-            <option value="Aberto">Aberto</option>
-            <option value="Em andamento">Em andamento</option>
-            <option value="Resolvido">Resolvido</option>
+        <select id="status-select" name="status" required>
+            <option value="">Selecione o Status</option>
+            <option th:each="option : ${statusList}" th:value="${option.id_status}" th:text="${option.nome}"></option>
         </select>
 
         <label for="priority-select">Prioridade:</label>
-        <select id="priority-select" class="form-control">
-            <option value="Alta">Alta</option>
-            <option value="Média">Média</option>
-            <option value="Baixa">Baixa</option>
-            <option value="Urgente">Urgente</option>
+        <select id="priority-select" name="prioridade" required>
+            <option value="">Selecione a Prioridade</option>
+            <option th:each="option : ${prioridades}" th:value="${option.id_prioridade}" th:text="${option.tipoPrioridade}"></option>
         </select>
 
         <div style="margin-top: 20px;">
+            <button class="save-modal" type="submit">Salvar</button>
+        </div>
+        </form>
+        <div style="margin-top: 20px;">
             <button class="close-modal" onclick="closeModal()">Fechar</button>
-            <button class="save-modal" onclick="saveChanges()">Salvar</button>
         </div>
     </div>
 </div>
 
-<script>
-    function openModal(description, status) {
-        document.getElementById('edit-modal').style.display = 'flex';
-        document.getElementById('status-select').value = status;
+<script th:inline="javascript">
+    function openModal(data) {
+    console.log("chegando aqui")
+        var id = data.getAttribute("data-id");
+var status = data.getAttribute("data-status");
+document.getElementById('edit-modal').style.display = 'flex';
+       document.getElementById('status-select').value = status;
+  document.getElementById('chamado-id').textContent= id;
     }
 
+</script>
+<script>
     function closeModal() {
         document.getElementById('edit-modal').style.display = 'none';
     }
@@ -127,6 +127,7 @@
             }
         }
     }
+
 </script>
 
 <script src="vendor/jquery/jquery.min.js"></script>
