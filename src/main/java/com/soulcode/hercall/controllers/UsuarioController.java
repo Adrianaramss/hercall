@@ -34,8 +34,10 @@ public class UsuarioController {
     private PrioridadeService prioridadeService;
 
     @PostMapping("/usuarios")
-    public ApiResponse<UsuarioDto> save(@RequestBody UsuarioDto dto) {
-        return this.usuarioService.save(dto);
+    public String  save(@ModelAttribute UsuarioDto dto) {
+        ApiResponse<UsuarioDto> usuarioCadastrado = this.usuarioService.save(dto);
+        return "redirect:/login";
+
     }
 
     @GetMapping("/usuarios")
