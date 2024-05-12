@@ -1,4 +1,4 @@
-package com.soulcode.hercall.controllers;
+package com.soulcode.hercall.restControllers;
 
 import com.soulcode.hercall.dtos.PrioridadeDto;
 import com.soulcode.hercall.services.PrioridadeService;

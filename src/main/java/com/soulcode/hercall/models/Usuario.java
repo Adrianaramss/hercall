@@ -21,21 +21,21 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true, nullable = false)
+    private String matricula;
+
     @Column(nullable = false)
     private String nome;
 
-    @Column (unique = true, nullable = false)
-    private String  email;
+    @Column(nullable = false, unique = true)
+    private String email;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String senha;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipo_usuario;
-
-    @Column (unique = true, nullable = false)
-    private String matricula;
 
     @OneToMany(mappedBy = "responsavel", cascade = CascadeType.ALL)
     private List<Chamado> chamadoListResponsavel = new ArrayList<>();
@@ -45,4 +45,5 @@ public class Usuario {
 
     public Usuario(Long idUsuario) {
     }
+
 }

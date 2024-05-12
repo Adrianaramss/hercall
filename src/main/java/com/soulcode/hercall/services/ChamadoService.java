@@ -1,20 +1,14 @@
 package com.soulcode.hercall.services;
 
 import com.soulcode.hercall.dtos.ChamadoDto;
-import com.soulcode.hercall.dtos.SetorDto;
-import com.soulcode.hercall.enumerator.TipoPrioridade;
 import com.soulcode.hercall.enumerator.TipoStatus;
 import com.soulcode.hercall.models.Chamado;
-import com.soulcode.hercall.models.Setor;
-import com.soulcode.hercall.models.Status;
 import com.soulcode.hercall.repositories.ChamadoRepository;
-import com.soulcode.hercall.repositories.StatusRepository;
 import com.soulcode.hercall.shared.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -25,16 +19,12 @@ public class ChamadoService {
     @Autowired
     ChamadoRepository chamadoRepository;
 
-    @Autowired
-    StatusRepository statusRepository;
-
     public ApiResponse<ChamadoDto> save(ChamadoDto dto) {
         try {
             dto.setData_inicio(LocalDate.now());
             //Definir Usuario Solicitante por Security
             Chamado chamado = ChamadoDto.convert(dto);
             chamado = this.chamadoRepository.save(chamado);
-
 
             return new ApiResponse<>(201, "Chamado cadastrado com sucesso!", new ChamadoDto(chamado));
         } catch (Exception e) {
@@ -71,7 +61,7 @@ public class ChamadoService {
                 return new ApiResponse<>(404, "Não é possível editar, pois chamado não foi encontrado por ID!", null);
             }
 
-            if (existeChamado.getData().getStatus().getNome().equals("FINALIZADO")) {
+            if (existeChamado.getData().getStatus().equals(TipoStatus.FINALIZADO)) {
                 return new ApiResponse<>(400, "Não é possível editar, pois chamado já foi finalizado!", null);
             }
 
@@ -106,9 +96,9 @@ public class ChamadoService {
         }
     }
 
-    public ApiResponse<List<ChamadoDto>> findChamadosByPrioridade(TipoPrioridade prioridade) {
+    public ApiResponse<List<ChamadoDto>> findChamadosByPrioridade(String tipoPrioridade) {
         try {
-            List<Chamado> chamados = this.chamadoRepository.findByPrioridade(prioridade);
+            List<Chamado> chamados = this.chamadoRepository.findByTipoPrioridade(tipoPrioridade);
             return new ApiResponse<>(200, "Listagem de chamados por prioridade realizada com sucesso!",
                     chamados.stream().map(ChamadoDto::new).collect(Collectors.toList()));
         } catch (Exception e) {
@@ -116,7 +106,7 @@ public class ChamadoService {
         }
     }
 
-    public ApiResponse<List<ChamadoDto>> findChamadosByStatus(String status) {
+    public ApiResponse<List<ChamadoDto>> findChamadosByStatus(TipoStatus status) {
         try {
             List<Chamado> chamados = this.chamadoRepository.findByStatus(status);
             return new ApiResponse<>(200, "Listagem de chamados por status realizada com sucesso!",
@@ -141,9 +131,9 @@ public class ChamadoService {
         }
     }
 
-    public ApiResponse<List<Object[]>> contarChamadosPorMes() {
+    public ApiResponse<List<Object[]>> countChamadosByMes() {
         try {
-            List<Object[]> resultado = this.chamadoRepository.contarChamadosPorMes();
+            List<Object[]> resultado = this.chamadoRepository.countChamadosByMes();
 
             return new ApiResponse<>(200, "Detalhamento de chamados por mês realizado com sucesso!", resultado);
         } catch (Exception e) {
@@ -151,9 +141,9 @@ public class ChamadoService {
         }
     }
 
-    public ApiResponse<List<Object[]>> contarChamadoPorStatus() {
+    public ApiResponse<List<Object[]>> countChamadosByStatus() {
         try {
-            List<Object[]> resultado = this.chamadoRepository.contarChamadosPorStatus();
+            List<Object[]> resultado = this.chamadoRepository.countChamadosByStatus();
 
             return new ApiResponse<>(200, "Detalhamento de chamados por status realizado com sucesso!", resultado);
         } catch (Exception e) {

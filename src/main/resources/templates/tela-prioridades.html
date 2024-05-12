@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,7 +58,7 @@
             <H3>Prioridades</H3>
             <div class="row">
                 <div class="col-md-6">
-                    <form id="addDepartmentForm">
+                    <form id="addDepartmentForm" action="/cadastra-prioridade" method="post">
                         <div class="form-group">
                             <label for="newDepartment">Adicionar Prioridade:</label>
                             <input type="text" class="form-control" id="newDepartment" placeholder="Digite o nome da nova prioridade">
@@ -78,13 +78,10 @@
             </div>
 
 
-            <!-- Lista de setores -->
-            <label for="newDepartment">Prioridades Ativas no momento:</label>
-            <ul class="departments mt-4">
-                <li>Alto</li>
-                <li>Média</li>
-                <li>Baixa</li>
-                <li>Urgente</li>
+            <!-- Lista de prioridades -->
+            <label for="newDepartment">Prioridades Ativos no momento:</label>
+            <ul class="departments mt-2" th:each="prioridade:${prioridades}">
+                <li th:text="*{prioridade.tipoPrioridade}"></li>
             </ul>
         </div>
     </div>

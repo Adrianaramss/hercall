@@ -1,5 +1,6 @@
 package com.soulcode.hercall.dtos;
 
+import com.soulcode.hercall.enumerator.TipoStatus;
 import com.soulcode.hercall.models.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -16,14 +17,14 @@ import java.util.Date;
 public class ChamadoDto {
     private Long id;
 
-    @NotBlank(message = "A descrição do chamado é obrigatória")
+    @NotBlank(message = "A descrição é obrigatória")
     private String descricao;
 
     private LocalDate data_inicio;
 
     private LocalDate data_termino;
 
-    private Status status;
+    private TipoStatus status;
 
     @NotBlank(message = "O setor é obrigatório")
     private Setor setor;
@@ -35,14 +36,12 @@ public class ChamadoDto {
 
     private Prioridade prioridade;
 
-    //construtor vazio
     public ChamadoDto() {
 
     }
 
-    //costrutor do id
     public ChamadoDto(Long id) {
-
+        this.id = id;
     }
 
     public ChamadoDto(Chamado chamado) {

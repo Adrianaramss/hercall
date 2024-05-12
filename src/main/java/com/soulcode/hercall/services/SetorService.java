@@ -1,7 +1,6 @@
 package com.soulcode.hercall.services;
 
 import com.soulcode.hercall.dtos.SetorDto;
-import com.soulcode.hercall.enumerator.TipoSetor;
 import com.soulcode.hercall.models.Setor;
 import com.soulcode.hercall.repositories.SetorRepository;
 import com.soulcode.hercall.shared.ApiResponse;
@@ -101,12 +100,12 @@ public class SetorService {
         }
     }
 
-    public ApiResponse<SetorDto> deleteByNome(TipoSetor tipoSetor) {
+    public ApiResponse<SetorDto> deleteByNome(String tipoSetor) {
         try {
 
             Optional<Setor> existeSetor = this.setorRepository.findSetorByTipoSetor(tipoSetor);
 
-            if(existeSetor.isEmpty()){
+            if (existeSetor.isEmpty()) {
                 return new ApiResponse<>(404, "Não foi possível excluir, pois setor não foi encontrado por descrição.", null);
             }
 
