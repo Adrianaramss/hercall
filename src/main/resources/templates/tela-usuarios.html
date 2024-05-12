@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta charset="UTF-8">
@@ -52,7 +52,7 @@
 
         <!-- Main Content -->
         <div class="col-md-9">
-            <h4 class="mt-4">Usuários Ativos:</h4>
+            <h4 class="mt-4">Usuários:</h4>
             <table>
                 <thead>
                 <tr>
@@ -61,21 +61,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>João Silva</td>
-                    <td>Técnico</td>
-                </tr>
-                <tr>
-                    <td>Maria Oliveira</td>
-                    <td>Usuário</td>
-                </tr>
-                <tr>
-                    <td>Carlos Pereira</td>
-                    <td>Técnico</td>
-                </tr>
-                <tr>
-                    <td>Fernanda Costa</td>
-                    <td>Usuário</td>
+                <tr th:each="usuario:${usuarios}">
+                    <td th:text="*{usuario.nome}"></td>
+                    <td th:text="*{usuario.tipoUsuario}"></td>
                 </tr>
                 </tbody>
             </table>

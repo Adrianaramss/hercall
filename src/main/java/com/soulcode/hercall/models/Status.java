@@ -1,5 +1,6 @@
 package com.soulcode.hercall.models;
 
+import com.soulcode.hercall.enumerator.TipoStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

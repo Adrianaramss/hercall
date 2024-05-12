@@ -3,6 +3,7 @@ package com.soulcode.hercall.services;
 import com.soulcode.hercall.dtos.ChamadoDto;
 import com.soulcode.hercall.dtos.SetorDto;
 import com.soulcode.hercall.enumerator.TipoPrioridade;
+import com.soulcode.hercall.enumerator.TipoStatus;
 import com.soulcode.hercall.models.Chamado;
 import com.soulcode.hercall.models.Setor;
 import com.soulcode.hercall.models.Status;
@@ -30,12 +31,6 @@ public class ChamadoService {
     public ApiResponse<ChamadoDto> save(ChamadoDto dto) {
         try {
             dto.setData_inicio(LocalDate.now());
-            Optional<Status> statusAberto = statusRepository.findByNome("Aberto");
-            if (statusAberto.isEmpty()) {
-                return new ApiResponse<>(400, "O Administrador não cadastrou um status 'Aberto'!", null);
-            } else {
-                dto.setStatus(statusAberto.get());
-            }
             //Definir Usuario Solicitante por Security
             Chamado chamado = ChamadoDto.convert(dto);
             chamado = this.chamadoRepository.save(chamado);
@@ -76,7 +71,7 @@ public class ChamadoService {
                 return new ApiResponse<>(404, "Não é possível editar, pois chamado não foi encontrado por ID!", null);
             }
 
-            if (existeChamado.getData().getStatus().getNome().equalsIgnoreCase("finalizado")) {
+            if (existeChamado.getData().getStatus().getNome().equals("FINALIZADO")) {
                 return new ApiResponse<>(400, "Não é possível editar, pois chamado já foi finalizado!", null);
             }
 
@@ -141,6 +136,26 @@ public class ChamadoService {
             chamado.setId(id);
             chamado = this.chamadoRepository.save(chamado);
             return new ApiResponse<>(200, "Chamado atualizado com sucesso!", new ChamadoDto(chamado));
+        } catch (Exception e) {
+            return new ApiResponse<>(500, e.getMessage(), null);
+        }
+    }
+
+    public ApiResponse<List<Object[]>> contarChamadosPorMes() {
+        try {
+            List<Object[]> resultado = this.chamadoRepository.contarChamadosPorMes();
+
+            return new ApiResponse<>(200, "Detalhamento de chamados por mês realizado com sucesso!", resultado);
+        } catch (Exception e) {
+            return new ApiResponse<>(500, e.getMessage(), null);
+        }
+    }
+
+    public ApiResponse<List<Object[]>> contarChamadoPorStatus() {
+        try {
+            List<Object[]> resultado = this.chamadoRepository.contarChamadosPorStatus();
+
+            return new ApiResponse<>(200, "Detalhamento de chamados por status realizado com sucesso!", resultado);
         } catch (Exception e) {
             return new ApiResponse<>(500, e.getMessage(), null);
         }

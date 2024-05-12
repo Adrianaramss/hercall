@@ -1,6 +1,7 @@
 package com.soulcode.hercall.services;
 
 import com.soulcode.hercall.dtos.SetorDto;
+import com.soulcode.hercall.enumerator.TipoSetor;
 import com.soulcode.hercall.models.Setor;
 import com.soulcode.hercall.repositories.SetorRepository;
 import com.soulcode.hercall.shared.ApiResponse;
@@ -95,6 +96,27 @@ public class SetorService {
             this.setorRepository.deleteById(id);
 
             return new ApiResponse<>(200, "Setor excluído com sucesso!", existeSetor.getData());
+        } catch (Exception e) {
+            return new ApiResponse<>(500, e.getMessage(), null);
+        }
+    }
+
+    public ApiResponse<SetorDto> deleteByNome(TipoSetor tipoSetor) {
+        try {
+
+            Optional<Setor> existeSetor = this.setorRepository.findSetorByTipoSetor(tipoSetor);
+
+            if(existeSetor.isEmpty()){
+                return new ApiResponse<>(404, "Não foi possível excluir, pois setor não foi encontrado por descrição.", null);
+            }
+
+            if (setorRepository.existChamadoByIdSetor(existeSetor.get().getId_setor())) {
+                return new ApiResponse<>(409, "Não é possível excluir, pois esse setor está relacionado a um chamado!", null);
+            }
+
+            this.setorRepository.deleteById(existeSetor.get().getId_setor());
+
+            return new ApiResponse<>(200, "Setor excluído com sucesso!", new SetorDto(existeSetor.get()));
         } catch (Exception e) {
             return new ApiResponse<>(500, e.getMessage(), null);
         }

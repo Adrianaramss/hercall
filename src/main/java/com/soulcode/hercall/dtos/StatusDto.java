@@ -1,5 +1,6 @@
 package com.soulcode.hercall.dtos;
 
+import com.soulcode.hercall.enumerator.TipoStatus;
 import com.soulcode.hercall.models.Status;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

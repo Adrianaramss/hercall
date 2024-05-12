@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administração de Chamados Técnicos</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Dashboard de Gestão de Chamados</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="css/telaprioridade.css">
 
 
@@ -27,7 +30,6 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/tela-admin">Dashboard - Área do administrador</a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link" href="/">Sair</a>
                 </li>
@@ -53,112 +55,47 @@
 
         <!-- Main Content -->
         <div class="col-md-9">
-            <div class="container">
-                <div class="section">
-                    <h2>Gerenciamento de Prioridades</h2>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Técnico</th>
-                            <th>Setor</th>
-                            <th>Descrição</th>
-                            <th>Prioridade</th>
-                            <th>Data de Início</th>
-                            <th>Status</th>
-                            <th>Ação</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>João Silva</td>
-                            <td>TI</td>
-                            <td>Computador não liga</td>
-                            <td>Alta</td>
-                            <td>07/05/2024</td>
-                            <td>Em-Atendimento</td>
-                            <td>
-                                <button type="button" class="btn btn-primary"
-                                        onclick="openModal('Computador não liga', 'Alta')">Alterar Prioridade
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Maria Oliveira</td>
-                            <td>Recursos Humanos</td>
-                            <td>Solicitação de férias</td>
-                            <td>Média</td>
-                            <td>05/05/2024</td>
-                            <td>Aberto</td>
-                            <td>
-                                <button type="button" class="btn btn-primary"
-                                        onclick="openModal('Solicitação de férias', 'Média')">Alterar Prioridade
-                                </button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Modal -->
-        <div class="modal" id="edit-modal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Editar Ordem de Serviço</h5>
-                        <button type="button" class="close" onclick="closeModal()">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p id="order-description"></p>
+            <H3>Prioridades</H3>
+            <div class="row">
+                <div class="col-md-6">
+                    <form id="addDepartmentForm">
                         <div class="form-group">
-                            <label for="priority-select">Prioridade:</label>
-                            <select class="form-control" id="priority-select">
-                                <option value="Urgente">Urgente</option>
-                                <option value="Alta">Alta</option>
-                                <option value="Média">Média</option>
-                                <option value="Baixa">Baixa</option>
-                            </select>
+                            <label for="newDepartment">Adicionar Prioridade:</label>
+                            <input type="text" class="form-control" id="newDepartment" placeholder="Digite o nome da nova prioridade">
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" onclick="closeModal()">Fechar</button>
-                        <button type="button" class="btn btn-primary" onclick="saveChanges()">Salvar</button>
-                    </div>
+                        <button type="submit" class="btn btn-success">Adicionar Prioridade</button>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <form id="deleteDepartmentForm">
+                        <div class="form-group">
+                            <label for="departmentName">Excluir Prioridade:</label>
+                            <input type="text" class="form-control" id="departmentName" placeholder="Digite o nome da prioridade a excluir">
+                        </div>
+                        <button type="submit" class="btn btn-danger">Excluir Prioridade</button>
+                    </form>
                 </div>
             </div>
+
+
+            <!-- Lista de setores -->
+            <label for="newDepartment">Prioridades Ativas no momento:</label>
+            <ul class="departments mt-4">
+                <li>Alto</li>
+                <li>Média</li>
+                <li>Baixa</li>
+                <li>Urgente</li>
+            </ul>
         </div>
     </div>
 </div>
-<!-- Bootstrap JS -->
+
+
+<!-- JS do Bootstrap, jQuery e Popper.js -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
-<script>
-    function openModal(description, priority) {
-        $('#order-description').text('Editando: ' + description);
-        $('#priority-select').val(priority);
-        $('#edit-modal').modal('show');
-    }
-
-
-    function closeModal() {
-        $('#edit-modal').modal('hide');
-    }
-
-
-    function saveChanges() {
-        const selectedPriority = $('#priority-select').val();
-        closeModal();
-    }
-</script>
-
 </body>
 </html>
-
-

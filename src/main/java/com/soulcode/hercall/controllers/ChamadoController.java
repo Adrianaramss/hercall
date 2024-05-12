@@ -55,7 +55,8 @@ public class ChamadoController {
     public ApiResponse<List<ChamadoDto>> findChamadosByStatus(@RequestParam String status) {
         return this.chamadoService.findChamadosByStatus(status);
     }
-//
+
+    //
 //    @PutMapping("/chamados/{id}")
 //    public ApiResponse<ChamadoDto> updateChamado(@PathVariable Long id, @RequestBody ChamadoDto dto) {
 //        return this.chamadoService.updateChamado(id, dto);
