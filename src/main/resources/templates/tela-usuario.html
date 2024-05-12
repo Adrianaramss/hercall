@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/telausuario.css">
 </head>
 
+
 <body class="bg-gradient-primary">
 <div class="header">
     <div class="user-info">
@@ -17,6 +18,7 @@
     </div>
     <a href="/" class="logout">Sair</a>
 </div>
+
 
 <div class="container">
     <div class="table-container">
@@ -39,7 +41,7 @@
                 <td th:text="*{chamado.setor.tipoSetor}"></td>
                 <td th:text="*{chamado.descricao}"></td>
                 <td th:text="${chamado.prioridade != null} ? ${#strings.toUpperCase(chamado.prioridade.tipoPrioridade)} : 'Prioridade não definida'"></td>
-<!--                <td th:text="*{chamado.prioridade.tipoPrioridade}"></td>-->
+                <!--                <td th:text="*{chamado.prioridade.tipoPrioridade}"></td>-->
                 <td th:text="*{chamado.data_inicio}"></td>
                 <td th:text="*{chamado.data_termino}"></td>
                 <td th:text="*{chamado.status.nome}"></td>
@@ -48,33 +50,59 @@
         </table>
     </div>
 
+
     <div class="form-container">
         <h2>Criar Novo Chamado</h2>
-        <form method="post" action="/chamados">
+        <form method="post" action="/chamados" onsubmit="showModal()">
             <label for="setor">Setor:</label>
             <select id="setor" name="setor" required>
                 <option value="">Selecione o Setor</option>
                 <option th:each="option : ${setores}" th:value="${option.id_setor}" th:text="${option.tipoSetor}"></option>
             </select>
 
+
             <label for="descricao">Descrição:</label>
             <input type="text" id="descricao" name="descricao" placeholder="Descreva o problema" required>
 
-<!--            <label for="arquivo">Anexo:</label>-->
-<!--            <input type="file" id="arquivo" name="arquivo" required>-->
+
+            <!--            <label for="arquivo">Anexo:</label>-->
+            <!--            <input type="file" id="arquivo" name="arquivo" required>-->
+
 
             <button class="btn btn-primary btn-user btn-block" type="submit">Criar Chamado</button>
         </form>
         <div th:if="${statusChamado}" onload="showModal([[${mensagem}]]);"></div>
-
-        <script>
-            function showModal(message) {
-                alert(message);
-                // Aqui você pode adicionar o código para exibir uma modal
-            }
-        </script>
     </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Chamado Cadastrado com Sucesso</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Seu chamado foi cadastrado com sucesso.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function showModal() {
+        $('#successModal').modal('show');
+    }
+</script>
+
 
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
