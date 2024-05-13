@@ -4,12 +4,17 @@
 
 </div>
 
+## Projeto final do bootcamp #ElasTech promovido pela PagBank em parceria com a SouldCode
+
+
 
 ## 💻 Sobre o Projeto
 O projeto HerCall é um sistema de gerenciamento de chamados desenvolvido utilizando Java Spring Boot e MySQL como banco de dados. O objetivo principal do sistema é facilitar o processo de solicitação, atribuição e acompanhamento de chamados técnicos em ambientes corporativos ou de suporte técnico.
 
 
 ## 🚀 Funcionalidades do Projeto
+
+
 
 
 
