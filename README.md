@@ -94,16 +94,148 @@ Apos Executar no botão "Play"
 ### 🎯 REGISTRA UM USUÁRIO NO BANCO DE DADOS.
 
 ```URL
-''
+POST - localhost:8080/usuarios
 ```
   
 ```JSON
-[
-  {
- 
+{
+    "nome": "maria",
+    "email": "maria13@gmail.com",
+    "matricula": "121248",
+    "senha": "1234",
+    "confirmaSenha": "1234",
+    "tipoUsuario": "FUNCIONARIO"    
+}
+```
+Output
+```JSON 
+{
+    "status": 201,
+    "message": "Usuário cadastrado com sucesso!",
+    "data": {
+        "id": 4,
+        "nome": "maria",
+        "email": "maria13@gmail.com",
+        "matricula": "121248",
+        "senha": "1234",
+        "confirmaSenha": null,
+        "tipoUsuario": "FUNCIONARIO"
     }
-  ]
+}
+```
+### 🎯 LISTAR TODOS OS USUÁRIOS .
+```URL
+GET - localhost:8080/usuarios
+```
+  
+Output
+```JSON 
+{
+    "status": 200,
+    "message": "Listagem de usuários realizada com sucesso!",
+    "data": [
+        {
+            "id": 1,
+            "nome": "Funcionario1",
+            "email": "funcionario1@example.com",
+            "matricula": "123",
+            "senha": "senha123",
+            "confirmaSenha": null,
+            "tipoUsuario": "FUNCIONARIO"
+        },
+        {
+            "id": 2,
+            "nome": "Admin1",
+            "email": "admin1@example.com",
+            "matricula": "456",
+            "senha": "senha456",
+            "confirmaSenha": null,
+            "tipoUsuario": "ADMIN"
+        },
+        {
+            "id": 3,
+            "nome": "Tecnico1",
+            "email": "tecnico1@example.com",
+            "matricula": "789",
+            "senha": "senha789",
+            "confirmaSenha": null,
+            "tipoUsuario": "TECNICO"
+        },
+        {
+            "id": 4,
+            "nome": "maria",
+            "email": "maria13@gmail.com",
+            "matricula": "121248",
+            "senha": "1234",
+            "confirmaSenha": null,
+            "tipoUsuario": "FUNCIONARIO"
+        }
+    ]
+}
+```
 
+### 🎯 PROCURAR UM USUARIO PELO SEU ID .
+```URL
+GET - localhost:8080/usuarios/4
+```
+  
+Output
+```JSON 
+{
+    "status": 200,
+    "message": "Detalhamento de usuário realizado com sucesso!",
+    "data": {
+        "id": 4,
+        "nome": "maria",
+        "email": "maria13@gmail.com",
+        "matricula": "121248",
+        "senha": "1234",
+        "confirmaSenha": null,
+        "tipoUsuario": "FUNCIONARIO"
+    }
+}
+```
+### 🎯 EDITAR UM USUARIO PELO SEU ID .
+```URL
+PUT - localhost:8080/usuarios/4
+```
+  
+Output
+```JSON 
+{
+    "status": 200,
+    "message": "Usuário editada com sucesso!",
+    "data": {
+        "id": 4,
+        "nome": "maria",
+        "email": "maria1308@gmail.com",
+        "matricula": "121248",
+        "senha": "1234",
+        "confirmaSenha": null,
+        "tipoUsuario": "FUNCIONARIO"
+    }
+}
+```
+### 🎯 EXCLUIR O USUARIO PELO ID .
+```URL
+DELETE - localhost:8080/usuarios/4
+```
+  
+Output
+```JSON 
+{
+    "status": 200,
+    "message": "Usuário excluído com sucesso!",
+    "data": {
+        "id": 4,
+        "nome": "maria",
+        "email": "maria1308@gmail.com",
+        "matricula": "121248",
+        "senha": "1234",
+        "confirmaSenha": null,
+        "tipoUsuario": "FUNCIONARIO"
+    }
+}
 ```
 
 
