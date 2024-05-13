@@ -16,7 +16,7 @@ O projeto HerCall é um sistema de gerenciamento de chamados desenvolvido utiliz
 
 ✅Painel Funcionario:
 
-- Exibição da tela principal do funcionário: Mostra os chamados em aberto, fornecendo uma visão geral das tarefas que precisam ser concluídas.
+- Exibição da tela principal do funcionário: Mostra os chamados em aberto.
 - Cadastro de novos chamados: Permite que os funcionários registrem novos chamados no sistema quando os usuários solicitam suporte ou assistência.
 
   
