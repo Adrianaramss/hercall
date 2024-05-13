@@ -4,7 +4,7 @@
 
 </div>
 
-## Projeto final do bootcamp #ElasTech
+## Projeto final do bootcamp #ElasTech2024
 
 
 
@@ -14,7 +14,34 @@ O projeto HerCall é um sistema de gerenciamento de chamados desenvolvido utiliz
 
 ## 🚀 Funcionalidades do Projeto
 
+✅Painel Funcionario:
 
+- Exibição da tela principal do funcionário: Mostra os chamados em aberto atribuídos ao funcionário, fornecendo uma visão geral das tarefas que precisam ser concluídas.
+- Cadastro de novos chamados: Permite que os funcionários registrem novos chamados no sistema quando os usuários solicitam suporte ou assistência.
+
+  
+✅Painel Técnico:
+
+- Exibição da tela principal do técnico: Mostra todos os chamados existentes no sistema, permitindo que os técnicos visualizem e gerenciem todos os chamados, independentemente do estado ou atribuição.
+  
+- Listagem de prioridades: Exibe uma lista de prioridades disponíveis para os técnicos selecionarem ao lidar com os chamados, permitindo uma classificação adequada das solicitações de suporte.
+  
+- Listagem de status de chamados: Fornece uma lista dos diferentes estados de chamados (aberto, em andamento, concluído, etc.), permitindo que os técnicos atualizem o status dos chamados conforme necessário.
+
+
+  
+✅Painel Admin:
+
+- Exibição de estatísticas mensais de chamados: Essa funcionalidade mostra as estatísticas mensais de chamados, provavelmente em forma de gráficos ou tabelas, permitindo aos administradores visualizar a quantidade de chamados registrados em cada mês.
+  
+- Exibição do número de chamados abertos, em atendimento e finalizados: Essa funcionalidade exibe informações sobre o número de chamados em diferentes estados, como abertos, em atendimento e finalizados, fornecendo uma visão geral do status atual dos chamados.
+  
+- Listagem de usuários cadastrados: Permite aos administradores visualizar todos os usuários cadastrados no sistema.
+  
+- Listagem de setores cadastrados: Similar à listagem de usuários, essa funcionalidade exibe todos os setores cadastrados no sistema, fornecendo informações relevantes sobre cada um deles.
+  
+- Cadastro e exclusão de setores: Permite aos administradores adicionar novos setores ao sistema ou remover setores existentes, conforme necessário, fornecendo flexibilidade na gestão dos setores da organização.
+- Cadastro e exclusão de prioridades: Oferece a capacidade de definir e gerenciar diferentes níveis de prioridade para os chamados, permitindo aos administradores configurar as prioridades de acordo com as necessidades da organização.
 
 
 
