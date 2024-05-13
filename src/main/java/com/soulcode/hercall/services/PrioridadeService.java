@@ -99,4 +99,25 @@ public class PrioridadeService {
             return new ApiResponse<>(500, e.getMessage(), null);
         }
     }
+
+    public ApiResponse<PrioridadeDto> deleteByNome(String tipoPrioridade) {
+        try {
+
+            Optional<Prioridade> existePrioridade = this.prioridadeRepository.findPrioridadeByTipoPrioridade(tipoPrioridade);
+
+            if (existePrioridade.isEmpty()) {
+                return new ApiResponse<>(404, "Não foi possível excluir, pois prioridade não foi encontrado por descrição.", null);
+            }
+
+            if (prioridadeRepository.existChamadoByIdPrioridade(existePrioridade.get().getId_prioridade())) {
+                return new ApiResponse<>(409, "Não é possível excluir, pois essa prioridade está relacionado a um chamado!", null);
+            }
+
+            this.prioridadeRepository.deleteById(existePrioridade.get().getId_prioridade());
+
+            return new ApiResponse<>(200, "Prioridade excluída com sucesso!", new PrioridadeDto(existePrioridade.get()));
+        } catch (Exception e) {
+            return new ApiResponse<>(500, e.getMessage(), null);
+        }
+    }
 }

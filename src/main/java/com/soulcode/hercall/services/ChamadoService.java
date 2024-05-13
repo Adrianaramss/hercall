@@ -22,6 +22,7 @@ public class ChamadoService {
     public ApiResponse<ChamadoDto> save(ChamadoDto dto) {
         try {
             dto.setData_inicio(LocalDate.now());
+            dto.setStatus(TipoStatus.AGUARDANDO_TECNICO);
             //Definir Usuario Solicitante por Security
             Chamado chamado = ChamadoDto.convert(dto);
             chamado = this.chamadoRepository.save(chamado);

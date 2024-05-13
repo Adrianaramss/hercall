@@ -47,7 +47,7 @@
                 <td th:text="*{chamado.status}"></td>
                 <td>
                     <span class="edit-icon" onclick="openModal(this)"
-                          th:attr="data-id=${chamado.id}, data-status='${chamado.status}'">✏️</span>
+                          th:attr="data-id=${chamado.id}, data-status=${chamado.status}, data-prioridade=${chamado.prioridade != null} ? ${chamado.prioridade.id_prioridade} : ''">✏️</span>
                 </td>
             </tr>
             </tbody>
@@ -58,25 +58,24 @@
 <div class="modal" id="edit-modal">
     <div class="modal-content">
         <h3>Editar Chamado Técnico</h3>
-        <form action="#" th:action="@{/chamados/{id}{id=${chamado-id}}}" th:method="patch">
+        ID do chamado: <span id="chamado-id"></span>
+            <input type="hidden" id="id">
 
-        <label for="status-select">Status:</label>
-        <select id="status-select" name="status" required>
-            <option value="">Selecione o Status</option>
-            <option th:each="option : ${statusList}" th:value="${option}" th:text="${option}"></option>
-        </select>
+            <label for="status-select">Status:</label>
+            <select id="status-select" name="status" required>
+                <option value="">Selecione o Status</option>
+                <option th:each="option : ${statusList}" th:value="${option}" th:text="${option}"></option>
+            </select>
 
-        <label for="priority-select">Prioridade:</label>
-        <select id="priority-select" name="prioridade" required>
-            <option value="">Selecione a Prioridade</option>
-            <option th:each="option : ${prioridades}" th:value="${option.id_prioridade}" th:text="${option.tipoPrioridade}"></option>
-        </select>
+            <label for="priority-select">Prioridade:</label>
+            <select id="priority-select" name="prioridade" required>
+                <option value="">Selecione a Prioridade</option>
+                <option th:each="option : ${prioridades}" th:value="${option.id_prioridade}" th:text="${option.tipoPrioridade}"></option>
+            </select>
+
 
         <div style="margin-top: 20px;">
-            <button class="save-modal" type="submit">Salvar</button>
-        </div>
-        </form>
-        <div style="margin-top: 20px;">
+            <button class="save-modal" onclick="saveModal()">Salvar</button>
             <button class="close-modal" onclick="closeModal()">Fechar</button>
         </div>
     </div>
@@ -84,23 +83,50 @@
 
 <script th:inline="javascript">
     function openModal(data) {
-    console.log("chegando aqui")
         var id = data.getAttribute("data-id");
-var status = data.getAttribute("data-status");
-document.getElementById('edit-modal').style.display = 'flex';
-       document.getElementById('status-select').value = status;
-  document.getElementById('chamado-id').textContent= id;
+        var status = data.getAttribute("data-status");
+        var prioridade = data.getAttribute("data-prioridade");
+
+        document.getElementById('id').value = id;
+        document.getElementById('status-select').value = status;
+        document.getElementById('priority-select').value = prioridade;
+
+        document.getElementById('chamado-id').textContent = id;
+        document.getElementById('edit-modal').style.display = 'flex';
     }
 
+    function saveModal() {
+      var id = document.getElementById('id').value;
+      var status = document.getElementById('status-select').value;
+      var prioridade = document.getElementById('priority-select').value;
+
+       var data = new URLSearchParams();
+       data.append('status', status);
+       data.append('prioridade', prioridade);
+
+      fetch('/edita-chamado/' + id, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: data
+      })
+        .then((response) => {
+           if(response.status == 200) {
+                alert("Chamado editado com sucesso!");
+           } else {
+                alert("Ocorreu um erro ao tentar editar o chamado!");
+           }
+
+           setTimeout(() => {
+               location.reload();
+            }, 1000);
+        });
+      }
 </script>
 <script>
     function closeModal() {
         document.getElementById('edit-modal').style.display = 'none';
-    }
-
-    function saveChanges() {
-        console.log("Alterações salvas.");
-        closeModal();
     }
 
     function filterTable() {
@@ -120,13 +146,12 @@ document.getElementById('edit-modal').style.display = 'flex';
                     txtValue = td.textContent || td.innerText;
                     if (txtValue.toUpperCase().indexOf(filter) > -1) {
                         tr[i].style.display = "";
-                        break; //
+                        break;
                     }
                 }
             }
         }
     }
-
 </script>
 
 <script src="vendor/jquery/jquery.min.js"></script>
