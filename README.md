@@ -4,7 +4,7 @@
 
 </div>
 
-## Projeto final do bootcamp #ElasTech promovido pela PagBank em parceria com a SouldCode
+## Projeto final do bootcamp #ElasTech
 
 
 
