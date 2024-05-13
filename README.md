@@ -26,7 +26,7 @@ O projeto HerCall é um sistema de gerenciamento de chamados desenvolvido utiliz
   
 - Listagem de prioridades: Exibe uma lista de prioridades disponíveis para os técnicos selecionarem ao lidar com os chamados, permitindo uma classificação adequada das solicitações de suporte.
   
-- Listagem de status de chamados: Fornece uma lista dos diferentes estados de chamados (aberto, em andamento, concluído, etc.), permitindo que os técnicos atualizem o status dos chamados conforme necessário.
+- Listagem de status de chamados: Fornece uma lista dos diferentes estados de chamados (Aguardando técnico, em atendimento, escalado para outro setor, cancelado e finalizado), permitindo que os técnicos atualizem o status dos chamados conforme necessário.
 
 
   
