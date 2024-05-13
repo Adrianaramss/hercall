@@ -13,8 +13,22 @@ O projeto HerCall é um sistema de gerenciamento de chamados desenvolvido utiliz
 
 
 
+## 📈 Diagrama
+
+
+![atualizado_diagrama](https://github.com/Adrianaramss/hercall/assets/111310311/cc1371be-e8b5-4064-a472-91f37a810b17)
 
 ## 💻 Tecnologias utilizadas no Projeto
+- JavaSpring
+- MySQL
+- Postman
+- Dependencia JDK
+- Thymeleaf
+- Spring Web
+- Spring Data JPA (Java Persistence API)
+- Spring Boot DevTools
+- Lombok
+- Bootstrap
 
 
 
@@ -61,4 +75,12 @@ Apos Executar no botão "Play"
 
 
 ## 🤝 Integrantes 
+[Anna Karoline](https://www.linkedin.com/in/annakarolinedevmobile/)  
+[Adriana Ramos](https://www.linkedin.com/in/adrianaramss/)  
+[Amanda Vidal](https://www.linkedin.com/in/amanda-vidal-557132115/)  
+[Daniela Sousa](https://www.linkedin.com/in/daniela-sousa-lima/)  
+[Jurineide Souza](https://www.linkedin.com/in/jurineidesouza/) 
+[Janete Souza](https://www.linkedin.com/in/janete-soares-almeida-souza-5a455022a/)  
+
+
 
