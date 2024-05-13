@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface PrioridadeRepository extends JpaRepository<Prioridade, Long> {
 
@@ -16,4 +18,7 @@ public interface PrioridadeRepository extends JpaRepository<Prioridade, Long> {
 
     @Query("SELECT COUNT(c) > 0 FROM Chamado c WHERE c.prioridade.id_prioridade = :id_prioridade")
     boolean existChamadoByIdPrioridade(Long id_prioridade);
+
+    @Query("SELECT p FROM Prioridade p WHERE p.tipoPrioridade = :tipoPrioridade")
+    Optional<Prioridade> findPrioridadeByTipoPrioridade(String tipoPrioridade);
 }

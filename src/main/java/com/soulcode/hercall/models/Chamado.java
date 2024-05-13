@@ -7,8 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -27,7 +25,6 @@ public class Chamado {
     @Column
     private LocalDate data_termino;
 
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoStatus status;
 

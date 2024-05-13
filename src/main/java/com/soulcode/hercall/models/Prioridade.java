@@ -1,7 +1,9 @@
 package com.soulcode.hercall.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -9,6 +11,8 @@ import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Prioridade {
     @Id
@@ -20,4 +24,5 @@ public class Prioridade {
 
     @OneToMany(mappedBy = "prioridade", cascade = CascadeType.ALL)
     private List<Chamado> chamadoList = new ArrayList<>();
+
 }

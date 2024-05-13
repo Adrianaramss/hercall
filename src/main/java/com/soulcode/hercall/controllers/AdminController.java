@@ -71,7 +71,9 @@ public class AdminController {
     }
 
     @GetMapping("/tela-prioridades")
-    public String telaPriodades() {
+    public String telaPriodades(Model model) {
+        List<PrioridadeDto> listarPrioridade = prioridadeService.findAll().getData();
+        model.addAttribute("prioridades", listarPrioridade);
         return "tela-prioridades";
     }
 
@@ -106,6 +108,13 @@ public class AdminController {
     @PostMapping("/cadastra-prioridade")
     public String savePrioridade(@ModelAttribute PrioridadeDto dto) {
         ApiResponse<PrioridadeDto> prioridadeCadastrado = this.prioridadeService.save(dto);
+
+        return "redirect:/tela-prioridades";
+    }
+
+    @PostMapping("/exclui-prioridade")
+    public String deletePrioridadePorNome(@ModelAttribute PrioridadeDto prioridadeDto, Model model) {
+        ApiResponse<PrioridadeDto> prioridadeExcluido = this.prioridadeService.deleteByNome(prioridadeDto.getTipoPrioridade());
 
         return "redirect:/tela-prioridades";
     }

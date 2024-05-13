@@ -61,16 +61,16 @@
                     <form id="addDepartmentForm" action="/cadastra-prioridade" method="post">
                         <div class="form-group">
                             <label for="newDepartment">Adicionar Prioridade:</label>
-                            <input type="text" class="form-control" id="newDepartment" placeholder="Digite o nome da nova prioridade">
+                            <input type="text" class="form-control" id="newDepartment" name="tipoPrioridade" placeholder="Digite o nome da nova prioridade">
                         </div>
                         <button type="submit" class="btn btn-success">Adicionar Prioridade</button>
                     </form>
                 </div>
                 <div class="col-md-6">
-                    <form id="deleteDepartmentForm">
+                    <form id="deleteDepartmentForm" action="/exclui-prioridade" method="post">
                         <div class="form-group">
                             <label for="departmentName">Excluir Prioridade:</label>
-                            <input type="text" class="form-control" id="departmentName" placeholder="Digite o nome da prioridade a excluir">
+                            <input type="text" class="form-control" id="departmentName" name="tipoPrioridade" placeholder="Digite o nome da prioridade a excluir">
                         </div>
                         <button type="submit" class="btn btn-danger">Excluir Prioridade</button>
                     </form>
@@ -79,7 +79,7 @@
 
 
             <!-- Lista de prioridades -->
-            <label for="newDepartment">Prioridades Ativos no momento:</label>
+            <label for="newDepartment">Prioridades ativas no momento:</label>
             <ul class="departments mt-2" th:each="prioridade:${prioridades}">
                 <li th:text="*{prioridade.tipoPrioridade}"></li>
             </ul>

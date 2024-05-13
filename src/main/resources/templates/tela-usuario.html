@@ -52,7 +52,7 @@
 
     <div class="form-container">
         <h2>Criar Novo Chamado</h2>
-        <form method="post" action="/cadastra-chamado" onsubmit="showModal()">
+        <form method="post" action="/cadastra-chamado">
             <label for="setor">Setor:</label>
             <select id="setor" name="setor" required>
                 <option value="">Selecione o Setor</option>
@@ -64,7 +64,7 @@
 
             <button class="btn btn-primary btn-user btn-block" type="submit">Criar Chamado</button>
         </form>
-        <div th:if="${statusChamado}" onload="showModal([[${mensagem}]]);"></div>
+        <div th:if="${session.statusChamado != null}" onload="showModal([[${session.mensagem}]]);"></div>
     </div>
 </div>
 
@@ -74,13 +74,13 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="successModalLabel">Chamado Cadastrado com Sucesso</h5>
+                <h5 class="modal-title" id="successModalLabel" th:text="${session.statusChamado != null && session.statusChamado == 200} ? 'Sucesso!' : 'Erro!'"></h5>
+
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                Seu chamado foi cadastrado com sucesso.
+            <div class="modal-body" th:text="${session.mensagem}">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

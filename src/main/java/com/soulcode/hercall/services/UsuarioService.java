@@ -1,5 +1,6 @@
 package com.soulcode.hercall.services;
 
+import com.soulcode.hercall.dtos.AuthDto;
 import com.soulcode.hercall.dtos.UsuarioDto;
 import com.soulcode.hercall.models.Usuario;
 import com.soulcode.hercall.repositories.UsuarioRepository;
@@ -31,6 +32,24 @@ public class UsuarioService {
             usuario = this.usuarioRepository.save(usuario);
 
             return new ApiResponse<>(201, "Usuário cadastrado com sucesso!", new UsuarioDto(usuario));
+        } catch (Exception e) {
+            return new ApiResponse<>(500, e.getMessage(), null);
+        }
+    }
+
+    public ApiResponse<UsuarioDto> login(AuthDto dto) {
+        try {
+            Optional<Usuario> existeUsuario = this.usuarioRepository.findByEmail(dto.getEmail());
+
+            if (existeUsuario.isEmpty()) {
+                return new ApiResponse<>(400, "Usuário ou senha inválida!", null);
+            }
+
+            if (!existeUsuario.get().getSenha().equals(dto.getSenha())) {
+                return new ApiResponse<>(400, "Usuário ou senha inválida!", null);
+            }
+
+            return new ApiResponse<>(200, "Login realizado com sucesso!", new UsuarioDto(existeUsuario.get()));
         } catch (Exception e) {
             return new ApiResponse<>(500, e.getMessage(), null);
         }

@@ -2,6 +2,7 @@ package com.soulcode.hercall.controllers;
 
 import com.soulcode.hercall.dtos.AuthDto;
 import com.soulcode.hercall.dtos.UsuarioDto;
+import com.soulcode.hercall.enumerator.TipoUsuario;
 import com.soulcode.hercall.services.UsuarioService;
 import com.soulcode.hercall.shared.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,21 @@ public class AuthController {
 
     @PostMapping("/login-usuario")
     public String login(@ModelAttribute AuthDto dto) {
-        return "redirect:/tela-admin";
+        ApiResponse<UsuarioDto> usuarioLogado = this.usuarioService.login(dto);
+
+        if (usuarioLogado.getData() == null) {
+            return "redirect:/";
+        }
+
+        if (usuarioLogado.getData().getTipoUsuario().equals(TipoUsuario.ADMIN)) {
+            return "redirect:/tela-admin";
+        } else if (usuarioLogado.getData().getTipoUsuario().equals(TipoUsuario.TECNICO)) {
+            return "redirect:/tela-tecnico";
+        } else if (usuarioLogado.getData().getTipoUsuario().equals(TipoUsuario.FUNCIONARIO)) {
+            return "redirect:/tela-usuario";
+        } else {
+            return "redirect:/";
+        }
     }
 
 }

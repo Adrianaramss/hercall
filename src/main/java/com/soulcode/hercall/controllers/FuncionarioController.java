@@ -5,6 +5,7 @@ import com.soulcode.hercall.dtos.SetorDto;
 import com.soulcode.hercall.services.ChamadoService;
 import com.soulcode.hercall.services.SetorService;
 import com.soulcode.hercall.shared.ApiResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,10 +35,10 @@ public class FuncionarioController {
     }
 
     @PostMapping("/cadastra-chamado")
-    public String save(@ModelAttribute ChamadoDto dto, Model model){
+    public String save(@ModelAttribute ChamadoDto dto, HttpSession session){
         ApiResponse<ChamadoDto> chamadoCadastrado = this.chamadoService.save(dto);
-        model.addAttribute("statusChamado", chamadoCadastrado.getStatus());
-        model.addAttribute("mensagem", chamadoCadastrado.getMessage());
+        session.setAttribute("statusChamado", chamadoCadastrado.getStatus());
+        session.setAttribute("mensagem", chamadoCadastrado.getMessage());
         return "redirect:/tela-usuario";
     }
 }
