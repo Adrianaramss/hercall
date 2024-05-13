@@ -76,11 +76,12 @@ Apos Executar no botão "Play"
 
 ## 🤝 Integrantes 
 [Anna Karoline](https://www.linkedin.com/in/annakarolinedevmobile/)  
-[Adriana Ramos](https://www.linkedin.com/in/adrianaramss/)  
+[Adriana Ramos](https://www.linkedin.com/in/adriana-ramss/)  
 [Amanda Vidal](https://www.linkedin.com/in/amanda-vidal-557132115/)  
 [Daniela Sousa](https://www.linkedin.com/in/daniela-sousa-lima/)  
-[Jurineide Souza](https://www.linkedin.com/in/jurineidesouza/) 
+[Jurineide Souza](https://www.linkedin.com/in/jurineidesouza/) <br>
 [Janete Souza](https://www.linkedin.com/in/janete-soares-almeida-souza-5a455022a/)  
+
 
 
 
