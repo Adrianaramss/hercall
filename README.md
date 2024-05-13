@@ -32,7 +32,7 @@ O projeto HerCall é um sistema de gerenciamento de chamados desenvolvido utiliz
   
 ✅Painel Admin:
 
-- Exibição de estatísticas mensais de chamados: Essa funcionalidade mostra as estatísticas mensais de chamados, provavelmente em forma de gráficos ou tabelas, permitindo aos administradores visualizar a quantidade de chamados registrados em cada mês.
+- Exibição de estatísticas mensais de chamados: Essa funcionalidade mostra as estatísticas mensais de chamados em forma de gráficos, permitindo aos administradores visualizar a quantidade de chamados registrados em cada mês.
   
 - Exibição do número de chamados abertos, em atendimento e finalizados: Essa funcionalidade exibe informações sobre o número de chamados em diferentes estados, como abertos, em atendimento e finalizados, fornecendo uma visão geral do status atual dos chamados.
   
@@ -41,6 +41,7 @@ O projeto HerCall é um sistema de gerenciamento de chamados desenvolvido utiliz
 - Listagem de setores cadastrados: Similar à listagem de usuários, essa funcionalidade exibe todos os setores cadastrados no sistema, fornecendo informações relevantes sobre cada um deles.
   
 - Cadastro e exclusão de setores: Permite aos administradores adicionar novos setores ao sistema ou remover setores existentes, conforme necessário, fornecendo flexibilidade na gestão dos setores da organização.
+  
 - Cadastro e exclusão de prioridades: Oferece a capacidade de definir e gerenciar diferentes níveis de prioridade para os chamados, permitindo aos administradores configurar as prioridades de acordo com as necessidades da organização.
 
 
