@@ -112,6 +112,8 @@
         body: data
       })
         .then((response) => {
+           closeModal();
+
            if(response.status == 200) {
                 alert("Chamado editado com sucesso!");
            } else {
@@ -120,7 +122,7 @@
 
            setTimeout(() => {
                location.reload();
-            }, 1000);
+            }, 2000);
         });
       }
 </script>
