@@ -407,6 +407,62 @@ Output
     ]
 }
 ```
+### 🎯 PROCURAR  O PRIORIDADE PELO ID .
+```URL
+GET - localhost:8080/prioridades/1
+```
+  
+Output
+```JSON 
+{
+    "status": 200,
+    "message": "Detalhamento de prioridade realizado com sucesso!",
+    "data": {
+        "id_prioridade": 1,
+        "tipoPrioridade": "Baixa"
+    }
+}
+```
+### 🎯 EDITAR UMA PRIORIDADE PELO SEU ID .
+```URL
+PUT - localhost:8080/prioridades/5
+```
+  ```JSON
+{
+    "tipoPrioridade": "URGENTISSIMA"
+}
+```
+Output
+```JSON 
+{
+    "status": 200,
+    "message": "Prioridade editada com sucesso!",
+    "data": {
+        "id_prioridade": 5,
+        "tipoPrioridade": "URGENTISSIMA"
+    }
+}
+
+```
+### 🎯 EXCLUIR A PRIORIDADE PELO ID .
+```URL
+DELETE - localhost:8080/prioridades/5
+```
+  
+Output
+```JSON 
+{
+    "status": 200,
+    "message": "Prioridade excluída com sucesso!",
+    "data": {
+        "id_prioridade": 5,
+        "tipoPrioridade": "URGENTISSIMA"
+    }
+}
+```
+
+
+```
 ## 🤝 Integrantes 
 [Anna Karoline](https://www.linkedin.com/in/annakarolinedevmobile/)  
 [Adriana Ramos](https://www.linkedin.com/in/adriana-ramss/)  
