@@ -1,34 +1,62 @@
 package com.soulcode.hercall.dtos;
+
+import com.soulcode.hercall.enumerator.TipoStatus;
 import com.soulcode.hercall.models.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
 @Setter
-
-
 public class ChamadoDto {
     private Long id;
+
+    @NotBlank(message = "A descrição é obrigatória")
     private String descricao;
-    private Date data_inicio;
-    private Date data_termino;
-    private Status status;
+
+    private LocalDate data_inicio;
+
+    private LocalDate data_termino;
+
+    private TipoStatus status;
+
+    @NotBlank(message = "O setor é obrigatório")
     private Setor setor;
+
     private Usuario solicitante;
+
     private Usuario responsavel;
+
     private Prioridade prioridade;
 
-    //construtor vazio
-    public ChamadoDto(){
+    public ChamadoDto() {
 
     }
-    //costrutor do id
-    public ChamadoDto(Long id){
 
+    public ChamadoDto(Long id) {
+        this.id = id;
+    }
+
+    public ChamadoDto(String descricao, TipoStatus status, Setor setor, Usuario solicitante, Prioridade prioridade) {
+        this.descricao = descricao;
+        this.status = status;
+        this.setor = setor;
+        this.solicitante = solicitante;
+        this.prioridade = prioridade;
+    }
+
+    public ChamadoDto(String descricao, TipoStatus status, Setor setor, Prioridade prioridade, Usuario responsavel) {
+        this.descricao = descricao;
+        this.status = status;
+        this.setor = setor;
+        this.responsavel = responsavel;
+        this.prioridade = prioridade;
     }
 
     public ChamadoDto(Chamado chamado) {
@@ -43,7 +71,12 @@ public class ChamadoDto {
         this.prioridade = chamado.getPrioridade();
     }
 
-    public static Chamado convert(ChamadoDto chamadoDto){
+    public ChamadoDto(Setor setor, String descricao) {
+        this.setor = setor;
+        this.descricao = descricao;
+    }
+
+    public static Chamado convert(ChamadoDto chamadoDto) {
         Chamado chamado = new Chamado(chamadoDto.id);
 
         chamado.setDescricao(chamadoDto.getDescricao());
@@ -56,9 +89,8 @@ public class ChamadoDto {
         chamado.setPrioridade(chamadoDto.getPrioridade());
         chamado.setResponsavel(chamadoDto.getResponsavel());
 
-        return  chamado;
+        return chamado;
     }
-
 
 
 }

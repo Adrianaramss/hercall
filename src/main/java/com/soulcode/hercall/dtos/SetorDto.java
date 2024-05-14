@@ -1,6 +1,5 @@
 package com.soulcode.hercall.dtos;
 
-import com.soulcode.hercall.enumerator.TipoSetor;
 import com.soulcode.hercall.models.Setor;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -13,13 +12,17 @@ public class SetorDto {
     private Long id_setor;
 
     @NotBlank(message = "Descrição do setor é obrigatória")
-    private TipoSetor tipoSetor;
+    private String tipoSetor;
 
     public SetorDto() {
     }
 
     public SetorDto(Long id_setor) {
         this.id_setor = id_setor;
+    }
+
+    public SetorDto(String tipoSetor) {
+        this.tipoSetor = tipoSetor;
     }
 
     public SetorDto(Setor setor) {

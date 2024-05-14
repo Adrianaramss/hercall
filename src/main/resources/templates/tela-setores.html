@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Gestão de Chamados</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/telasetor.css">
+
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">Gestão de Chamados</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/tela-admin">Dashboard - Área do administrador</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Sair</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container mt-4 main-content">
+    <div class="row">
+        <!-- Side Menu -->
+        <div class="col-md-3">
+            <div class="list-group">
+                <a href="/tela-admin" class="list-group-item list-group-item-action">Visão Geral</a>
+                <a href="/tela-usuarios" class="list-group-item list-group-item-action">Usuários</a>
+                <a href="/tela-prioridades" class="list-group-item list-group-item-action">Prioridades</a>
+                <a href="/tela-setores" class="list-group-item list-group-item-action">Setores</a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9">
+            <H3>Setores</H3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="addSetor">Adicionar Setor:</label>
+                        <input type="text" class="form-control" id="addSetor" name="tipoSetor" placeholder="Digite o nome do novo setor">
+                    </div>
+                    <button onclick="addSetor()" class="btn btn-success">Adicionar Setor</button>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="deleteSetor">Excluir Setor:</label>
+                        <input type="text" class="form-control" id="deleteSetor" name="tipoSetor" placeholder="Digite o nome do setor a excluir">
+                    </div>
+                    <button onclick="deleteSetor()" class="btn btn-danger">Excluir Setor</button>
+                </div>
+            </div>
+            <label>Setores ativos no momento:</label>
+            <ul class="departments mt-2" th:each="setor:${setores}">
+                <li th:text="*{setor.tipoSetor}"></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    function addSetor() {
+      var setor = document.getElementById('addSetor').value;
+
+      var data = new URLSearchParams();
+      data.append('setor', setor);
+
+      fetch('/cadastra-setor', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: data
+      })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        if (data.message) {
+            alert(data.message);
+        } else {
+            alert("Ocorreu um erro ao tentar cadastrar o setor!");
+        }
+
+        setTimeout(() => {
+            location.reload();
+        }, 500);
+      });
+    }
+
+     function deleteSetor() {
+      var setor = document.getElementById('deleteSetor').value;
+
+      var data = new URLSearchParams();
+      data.append('setor', setor);
+
+      fetch('/exclui-setor', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: data
+      })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        if (data.message) {
+            alert(data.message);
+        } else {
+            alert("Ocorreu um erro ao tentar cadastrar o setor!");
+        }
+
+        setTimeout(() => {
+            location.reload();
+        }, 500);
+      });
+    }
+</script>
+
+<!-- JS do Bootstrap, jQuery e Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

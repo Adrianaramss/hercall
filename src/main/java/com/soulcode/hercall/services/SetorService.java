@@ -3,6 +3,7 @@ package com.soulcode.hercall.services;
 import com.soulcode.hercall.dtos.SetorDto;
 import com.soulcode.hercall.models.Setor;
 import com.soulcode.hercall.repositories.SetorRepository;
+import com.soulcode.hercall.shared.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,40 +17,108 @@ public class SetorService {
     @Autowired
     SetorRepository setorRepository;
 
-    public SetorDto save(SetorDto setorDto) {
-        Setor setor = SetorDto.convert(setorDto);
-        setor = this.setorRepository.save(setor);
+    public ApiResponse<SetorDto> save(SetorDto dto) {
+        try {
+            if (setorRepository.existByTipoSetor(dto.getTipoSetor())) {
+                return new ApiResponse<>(409, "Já existe outro setor com essa descrição!", null);
+            }
 
-        return new SetorDto(setor);
-    }
+            Setor setor = SetorDto.convert(dto);
+            setor = this.setorRepository.save(setor);
 
-    public List<SetorDto> findAll() {
-        List<Setor> setores = this.setorRepository.findAll();
-        return setores.stream().map(SetorDto::new).collect(Collectors.toList());
-    }
-
-    public SetorDto findById(Long id) {
-        Optional<Setor> resultado = this.setorRepository.findById(id);
-        if (resultado.isEmpty()) {
-            throw new RuntimeException("Setor não encontrado");
-        } else {
-            return new SetorDto(resultado.get());
+            return new ApiResponse<>(201, "Setor cadastrado com sucesso!", new SetorDto(setor));
+        } catch (Exception e) {
+            return new ApiResponse<>(500, e.getMessage(), null);
         }
     }
 
-    public SetorDto updateById(Long id, SetorDto setorDto) {
-        this.findById(id);
-        Setor setor = SetorDto.convert(setorDto);
-        setor.setId_setor(id);
-        setor = this.setorRepository.save(setor);
-
-        return new SetorDto(setor);
+    public ApiResponse<List<SetorDto>> findAll() {
+        try {
+            List<Setor> setores = this.setorRepository.findAll();
+            return new ApiResponse<>(200, "Listagem de setores realizada com sucesso!",
+                    setores.stream().map(SetorDto::new).collect(Collectors.toList()));
+        } catch (Exception e) {
+            return new ApiResponse<>(500, e.getMessage(), null);
+        }
     }
 
-    public SetorDto deleteById(Long id) {
-        SetorDto setorDto = findById(id);
-        this.setorRepository.deleteById(id);
+    public ApiResponse<SetorDto> findById(Long id) {
+        try {
+            Optional<Setor> resultado = this.setorRepository.findById(id);
 
-        return setorDto;
+            return resultado.map(setor -> new ApiResponse<>(200, "Detalhamento de setor realizado com sucesso!",
+                    new SetorDto(setor))).orElseGet(() -> new ApiResponse<>(204, "Setor não encontrado!", null));
+        } catch (Exception e) {
+            return new ApiResponse<>(500, e.getMessage(), null);
+        }
     }
+
+    public ApiResponse<SetorDto> updateById(Long id, SetorDto dto) {
+        try {
+            ApiResponse<SetorDto> existeSetor = this.findById(id);
+
+            if (existeSetor.getStatus() != 200) {
+                return new ApiResponse<>(404, "Não é possível editar, pois setor não foi encontrado por ID!", null);
+            }
+
+            Setor setor = SetorDto.convert(dto);
+            setor.setId_setor(id);
+
+            if (setorRepository.existByTipoSetorAndNotId(dto.getTipoSetor(), id)) {
+                return new ApiResponse<>(409, "Não é possível editar, pois já existe outro setor com essa descrição!", null);
+            }
+
+            if (setorRepository.existChamadoByIdSetor(id)) {
+                return new ApiResponse<>(409, "Não é possível editar, pois esse setor está relacionado a um chamado!", null);
+            }
+
+            setor = this.setorRepository.save(setor);
+
+            return new ApiResponse<>(200, "Setor editado com sucesso!", new SetorDto(setor));
+        } catch (Exception e) {
+            return new ApiResponse<>(500, e.getMessage(), null);
+        }
+    }
+
+    public ApiResponse<SetorDto> deleteById(Long id) {
+        try {
+            ApiResponse<SetorDto> existeSetor = this.findById(id);
+
+            if (existeSetor.getStatus() != 200) {
+                return new ApiResponse<>(404, "Não foi possível excluir, pois setor não foi encontrado por ID!", null);
+            }
+
+            if (setorRepository.existChamadoByIdSetor(id)) {
+                return new ApiResponse<>(409, "Não é possível excluir, pois esse setor está relacionado a um chamado!", null);
+            }
+
+            this.setorRepository.deleteById(id);
+
+            return new ApiResponse<>(200, "Setor excluído com sucesso!", existeSetor.getData());
+        } catch (Exception e) {
+            return new ApiResponse<>(500, e.getMessage(), null);
+        }
+    }
+
+    public ApiResponse<SetorDto> deleteByNome(String tipoSetor) {
+        try {
+
+            Optional<Setor> existeSetor = this.setorRepository.findSetorByTipoSetor(tipoSetor);
+
+            if (existeSetor.isEmpty()) {
+                return new ApiResponse<>(404, "Não foi possível excluir, pois setor não foi encontrado por descrição.", null);
+            }
+
+            if (setorRepository.existChamadoByIdSetor(existeSetor.get().getId_setor())) {
+                return new ApiResponse<>(409, "Não é possível excluir, pois esse setor está relacionado a um chamado!", null);
+            }
+
+            this.setorRepository.deleteById(existeSetor.get().getId_setor());
+
+            return new ApiResponse<>(200, "Setor excluído com sucesso!", new SetorDto(existeSetor.get()));
+        } catch (Exception e) {
+            return new ApiResponse<>(500, e.getMessage(), null);
+        }
+    }
+
 }

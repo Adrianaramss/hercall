@@ -1,11 +1,18 @@
 package com.soulcode.hercall.models;
-import com.soulcode.hercall.enumerator.TipoSetor;
+
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Setor {
 
@@ -13,7 +20,10 @@ public class Setor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_setor;
 
-    @Enumerated(EnumType.STRING)
-    private TipoSetor tipoSetor;
+    @Column(nullable = false, unique = true)
+    private String tipoSetor;
+
+    @OneToMany(mappedBy = "setor", cascade = CascadeType.ALL)
+    private List<Chamado> chamadoList = new ArrayList<>();
 
 }

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel Técnico</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/telatecnico.css">
+</head>
+
+<body class="bg-gradient-primary">
+<div class="header">
+    <div class="user-info">
+        Bem-vindo!
+    </div>
+    <a href="/" class="logout">Sair</a>
+</div>
+
+<div class="container">
+    <div class="table-container">
+        <h2>Chamados</h2>
+
+        <input type="text" id="search" placeholder="Pesquisar chamados..." onkeyup="filterTable()" style="width: 100%; padding: 10px; margin-bottom: 10px;">
+
+        <table class="table" id="chamados-table">
+            <thead>
+            <tr>
+                <th>Chamado</th>
+                <th>Setor</th>
+                <th>Descrição</th>
+                <th>Prioridade</th>
+                <th>Data de Início</th>
+                <th>Data de Término</th>
+                <th>Status</th>
+                <th>Ação</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="chamado:${chamados}">
+                <td th:text="*{chamado.id}"></td>
+                <td th:text="*{chamado.setor.tipoSetor}"></td>
+                <td th:text="*{chamado.descricao}"></td>
+                <td th:text="${chamado.prioridade != null} ? ${#strings.toUpperCase(chamado.prioridade.tipoPrioridade)} : 'Prioridade não definida'"></td>
+                <td th:text="*{chamado.data_inicio}"></td>
+                <td th:text="*{chamado.data_termino}"></td>
+                <td th:text="*{chamado.tipoStatus}"></td>
+                <td>
+                    <span class="edit-icon" onclick="openModal(this)"
+                          th:attr="data-id=${chamado.id}, data-status=${chamado.status}, data-prioridade=${chamado.prioridade != null} ? ${chamado.prioridade.id_prioridade} : ''">✏️</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal" id="edit-modal">
+    <div class="modal-content">
+        <h3>Editar Chamado Técnico</h3>
+        ID do chamado: <span id="chamado-id"></span>
+            <input type="hidden" id="id">
+
+            <label for="status-select">Status:</label>
+            <select id="status-select" name="status" required>
+                <option value="">Selecione o Status</option>
+                <option th:each="option : ${statusList}" th:value="${option}" th:text="${option}"></option>
+            </select>
+
+            <label for="priority-select">Prioridade:</label>
+            <select id="priority-select" name="prioridade" required>
+                <option value="">Selecione a Prioridade</option>
+                <option th:each="option : ${prioridades}" th:value="${option.id_prioridade}" th:text="${option.tipoPrioridade}"></option>
+            </select>
+
+
+        <div style="margin-top: 20px;">
+            <button class="save-modal" onclick="saveModal()">Salvar</button>
+            <button class="close-modal" onclick="closeModal()">Fechar</button>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    function openModal(data) {
+        var id = data.getAttribute("data-id");
+        var status = data.getAttribute("data-status");
+        var prioridade = data.getAttribute("data-prioridade");
+
+        document.getElementById('id').value = id;
+        document.getElementById('status-select').value = status;
+        document.getElementById('priority-select').value = prioridade;
+
+        document.getElementById('chamado-id').textContent = id;
+        document.getElementById('edit-modal').style.display = 'flex';
+    }
+
+   function saveModal() {
+      var id = document.getElementById('id').value;
+      var status = document.getElementById('status-select').value;
+      var prioridade = document.getElementById('priority-select').value;
+
+      var data = new URLSearchParams();
+      data.append('status', status);
+      data.append('prioridade', prioridade);
+
+      fetch('/edita-chamado/' + id, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: data
+      })
+        .then((response) => {
+          closeModal();
+          return response.json();
+        })
+        .then((data) => {
+          if (data.message) {
+            alert(data.message);
+          } else {
+            alert("Ocorreu um erro ao tentar editar o chamado!");
+          }
+        });
+      }
+</script>
+<script>
+    function closeModal() {
+        document.getElementById('edit-modal').style.display = 'none';
+    }
+
+    function filterTable() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("search");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("chamados-table");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 1; i < tr.length; i++) {
+            tr[i].style.display = "none";
+            tdArray = tr[i].getElementsByTagName("td");
+
+            for (var j = 0; j < tdArray.length; j++) {
+                td = tdArray[j];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                        break;
+                    }
+                }
+            }
+        }
+    }
+</script>
+
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="js/sb-admin-2.min.js"></script>
+
+</body>
+</html>

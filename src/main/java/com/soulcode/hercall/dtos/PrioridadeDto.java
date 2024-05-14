@@ -1,6 +1,5 @@
 package com.soulcode.hercall.dtos;
 
-import com.soulcode.hercall.enumerator.TipoPrioridade;
 import com.soulcode.hercall.models.Prioridade;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -13,13 +12,17 @@ public class PrioridadeDto {
     private Long id_prioridade;
 
     @NotBlank(message = "Descrição da prioridade é obrigatória")
-    private TipoPrioridade tipoPrioridade;
+    private String tipoPrioridade;
 
     public PrioridadeDto() {
     }
 
     public PrioridadeDto(Long id_prioridade) {
         this.id_prioridade = id_prioridade;
+    }
+
+    public PrioridadeDto(String tipoPrioridade) {
+        this.tipoPrioridade = tipoPrioridade;
     }
 
     public PrioridadeDto(Prioridade prioridade) {

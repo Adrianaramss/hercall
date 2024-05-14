@@ -1,11 +1,12 @@
 package com.soulcode.hercall.models;
 
 
+import com.soulcode.hercall.enumerator.TipoStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -15,40 +16,40 @@ public class Chamado {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String descricao;
 
     @Column
-    private Date data_inicio;
+    private LocalDate data_inicio;
 
     @Column
-    private  Date data_termino;
+    private LocalDate data_termino;
+
+    @Enumerated(EnumType.STRING)
+    private TipoStatus status;
 
     @ManyToOne
-    @JoinColumn (name = "id_status", nullable = false)
-    private  Status status;
-
-    @ManyToOne
-    @JoinColumn (name = "id_setor", nullable = false)
+    @JoinColumn(name = "id_setor", nullable = false)
     private Setor setor;
 
-
     @ManyToOne
-    @JoinColumn(name = "id_solicitante", nullable = false)
+    @JoinColumn(name = "id_solicitante")
     private Usuario solicitante;
 
 
     @ManyToOne
-    @JoinColumn(name = "id_responsavel", nullable = false)
+    @JoinColumn(name = "id_responsavel")
     private Usuario responsavel;
 
     @ManyToOne
-    @JoinColumn(name = "id_prioridade", nullable = false)
+    @JoinColumn(name = "id_prioridade")
     private Prioridade prioridade;
 
-    public Chamado(Long idChamado) {
+    public Chamado() {
     }
 
-
+    public Chamado(Long idChamado) {
+        this.id = idChamado;
+    }
 
 }

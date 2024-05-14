@@ -1,154 +1,104 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <title>Painel do Usuário</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap">
-  <style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: "Poppins", sans-serif;
-        background: linear-gradient(to right, #020F1F, #451776);
-        color: white;
-    }
-
-    .header {
-        background: rgba(255, 255, 255, 0.2);
-        padding: 15px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .user-info {
-        font-weight: 600;
-    }
-
-    .logout {
-        text-decoration: none;
-        color: white;
-        background: #920069;
-        padding: 10px;
-        border-radius: 20px;
-        font-weight: 600;
-        transition: background 0.3s;
-    }
-
-    .logout:hover {
-        background: #740053;
-    }
-
-    .container {
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .call-card {
-        height: 25vh;
-        background: white;
-        color: black;
-        border-radius: 10px;
-        padding: 20px;
-        margin: 10px 0;
-        width: 50%;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        transition: box-shadow 0.3s;
-    }
-
-    .call-card:hover {
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    }
-
-    .call-card h3 {
-        font-weight: 600;
-    }
-
-    form {
-        width: 50%;
-        background: rgba(255, 255, 255, 0.2);
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    form h3 {
-        font-weight: 600;
-        text-align: center;
-    }
-
-    input[type="text"], input[type="submit"] {
-        border: none;
-        padding: 10px;
-        width: 100%;
-        border-bottom: 2px solid #920069;
-        color: white;
-        font-size: 16px;
-        transition: border-color 0.3s;
-    }
-
-    input[type="text"]:focus {
-        outline: none;
-        border-color: #740053;
-    }
-
-    .submit-button {
-        padding: 10px;
-        background: #920069;
-        color: white;
-        border-radius: 20px;
-        text-align: center;
-        cursor: pointer;
-        width: 50%
-    }
-
-  </style>
+    <meta charset="UTF-8">
+    <title>Painel do Usuário</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/telausuario.css">
 </head>
-<body>
+
+
+<body class="bg-gradient-primary">
 <div class="header">
-  <div class="user-info">
-    <span>Bem-vindo, João da Silva</span> <!-- Exemplo de nome do usuário -->
-    <span>Matrícula: 12345</span> <!-- Exemplo de matrícula -->
-  </div>
-  <a href="/logout" class="logout">Sair</a> <!-- Exemplo de botão de logout -->
+    <div class="user-info">
+        <span>Bem-vindo!</span>
+    </div>
+    <a href="/" class="logout">Sair</a>
 </div>
 
 <div class="container">
-  <!-- Lista de chamados -->
-  <div class="call-card">
-    <h3>Chamado 1</h3>
-    <p><strong>Setor:</strong> TI</p>
-    <p><strong>Descrição:</strong> Computador não liga</p>
-    <p><strong>Prioridade:</strong> Alta</p>
-    <p><strong>Data de Início:</strong> 2024-05-07</p>
-  </div>
+    <div class="table-container">
+        <h2>Chamados</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Chamado</th>
+                <th>Setor</th>
+                <th>Descrição</th>
+                <th>Prioridade</th>
+                <th>Data de Início</th>
+                <th>Data de Término</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="chamado:${chamadosAbertos}">
+                <td th:text="*{chamado.id}"></td>
+                <td th:text="*{chamado.setor.tipoSetor}"></td>
+                <td th:text="*{chamado.descricao}"></td>
+                <td th:text="${chamado.prioridade != null} ? ${chamado.prioridade.tipoPrioridade} : 'Prioridade não definida'"></td>
+                <td th:text="*{chamado.data_inicio}"></td>
+                <td th:text="*{chamado.data_termino}"></td>
+                <td th:text="*{chamado.status}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-  <div class="call-card">
-    <h3>Chamado 2</h3>
-    <p><strong>Setor:</strong> Recursos Humanos</p>
-    <p><strong>Descrição:</strong> Solicitação de férias</p>
-    <p><strong>Prioridade:</strong> Média</p>
-    <p><strong>Data de Início:</strong> 2024-05-05</p>
-  </div>
 
-  <!-- Formulário para criar novos chamados -->
-  <form method="post" action="/criar-chamado">
-    <h3>Criar Novo Chamado</h3>
-    <label for="setor">Escolha uma opção:</label>
-    <select id="Setor" name="setor">
-      <option value="">Selecione o Setor</option>
-      <option value="Suporte">Suporte</option>
-      <option value="Financeiro">Financeiro</option>
-      <option value="Marketing">Marketing</option>
-      <option value="RH">RH</option>
-      <option value="Departamento Pessoal">Departamento Pessoal</option>
-    </select>
-    <input type="text" name="descricao" placeholder="Descrição" required>
-    <input type="text" name="prioridade" placeholder="Prioridade" required>
-    <input type="submit" value="Criar Chamado" class="submit-button">
-  </form>
+    <div class="form-container">
+        <h2>Criar Novo Chamado </h2>
+        <label for="setor">Setor:</label>
+        <select id="setor" name="setor" required>
+            <option value="">Selecione o Setor</option>
+            <option th:each="option : ${setores}" th:value="${option.id_setor}" th:text="${option.tipoSetor}"></option>
+        </select>
+
+        <label for="descricao">Descrição:</label>
+        <input type="text" id="descricao" name="descricao" placeholder="Descreva o problema" required>
+
+        <button class="btn btn-primary btn-user btn-block" onclick="saveChamado()">Criar Chamado</button>
+    </div>
 </div>
+
+<script th:inline="javascript">
+    function saveChamado() {
+      var setor = document.getElementById('setor').value;
+      var descricao = document.getElementById('descricao').value;
+
+      var data = new URLSearchParams();
+      data.append('setor', setor);
+      data.append('descricao', descricao);
+
+      fetch('/cadastra-chamado', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: data
+      })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        if (data.message) {
+            alert(data.message);
+        } else {
+            alert("Ocorreu um erro ao tentar cadastrar o chamado!");
+        }
+
+        setTimeout(() => {
+            location.reload();
+        }, 500);
+      });
+    }
+</script>
+
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="js/sb-admin-2.min.js"></script>
 </body>
 </html>
