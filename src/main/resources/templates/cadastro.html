@@ -65,6 +65,9 @@
                                 <label for="usuario"> Usuário </label>
                                 <input type="radio" name="tipoUsuario" value="FUNCIONARIO" id="usuario">
                             </div>
+                            <div id="error-message" class="text-danger">
+                                <p th:if="${erro != null}" th:text="${erro}"></p>
+                            </div>
                             <button class="btn btn-primary btn-user btn-block" type="submit" id="submit_button">Cadastrar</button>
                         </form>
                         <hr>

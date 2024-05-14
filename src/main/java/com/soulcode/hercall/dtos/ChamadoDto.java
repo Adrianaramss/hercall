@@ -29,7 +29,6 @@ public class ChamadoDto {
     @NotBlank(message = "O setor é obrigatório")
     private Setor setor;
 
-    //@NotBlank(message = "O usuário solicitante é obrigatório")
     private Usuario solicitante;
 
     private Usuario responsavel;
@@ -42,6 +41,22 @@ public class ChamadoDto {
 
     public ChamadoDto(Long id) {
         this.id = id;
+    }
+
+    public ChamadoDto(String descricao, TipoStatus status, Setor setor, Usuario solicitante, Prioridade prioridade) {
+        this.descricao = descricao;
+        this.status = status;
+        this.setor = setor;
+        this.solicitante = solicitante;
+        this.prioridade = prioridade;
+    }
+
+    public ChamadoDto(String descricao, TipoStatus status, Setor setor, Prioridade prioridade, Usuario responsavel) {
+        this.descricao = descricao;
+        this.status = status;
+        this.setor = setor;
+        this.responsavel = responsavel;
+        this.prioridade = prioridade;
     }
 
     public ChamadoDto(Chamado chamado) {

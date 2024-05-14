@@ -44,7 +44,7 @@
                 <td th:text="${chamado.prioridade != null} ? ${#strings.toUpperCase(chamado.prioridade.tipoPrioridade)} : 'Prioridade não definida'"></td>
                 <td th:text="*{chamado.data_inicio}"></td>
                 <td th:text="*{chamado.data_termino}"></td>
-                <td th:text="*{chamado.status}"></td>
+                <td th:text="*{chamado.tipoStatus}"></td>
                 <td>
                     <span class="edit-icon" onclick="openModal(this)"
                           th:attr="data-id=${chamado.id}, data-status=${chamado.status}, data-prioridade=${chamado.prioridade != null} ? ${chamado.prioridade.id_prioridade} : ''">✏️</span>

@@ -44,7 +44,7 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     private void initSetores() {
-        String[] tipoSetor = {"Suporte", "Financeiro", "Markenting", "RH", "Departamento pessoal", "Desenvolvimento web"};
+        String[] tipoSetor = {"Suporte", "Financeiro", "Marketing", "RH", "Departamento pessoal", "Desenvolvimento web"};
 
         for (String tipo : tipoSetor) {
             Setor setor = new Setor();

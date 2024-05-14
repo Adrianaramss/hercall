@@ -1,7 +1,17 @@
 package com.soulcode.hercall.restControllers;
 
 import com.soulcode.hercall.dtos.ChamadoDto;
+import com.soulcode.hercall.dtos.PrioridadeDto;
+import com.soulcode.hercall.dtos.SetorDto;
+import com.soulcode.hercall.dtos.UsuarioDto;
+import com.soulcode.hercall.enumerator.TipoStatus;
+import com.soulcode.hercall.models.Prioridade;
+import com.soulcode.hercall.models.Setor;
+import com.soulcode.hercall.models.Usuario;
 import com.soulcode.hercall.services.ChamadoService;
+import com.soulcode.hercall.services.PrioridadeService;
+import com.soulcode.hercall.services.SetorService;
+import com.soulcode.hercall.services.UsuarioService;
 import com.soulcode.hercall.shared.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +26,27 @@ public class ChamadoController {
     @Autowired
     private ChamadoService chamadoService;
 
+    @Autowired
+    private SetorService setorService;
+
+    @Autowired
+    private PrioridadeService prioridadeService;
+
+    @Autowired
+    private UsuarioService usuarioService;
+
     @PostMapping("/chamados")
-    public ApiResponse<Map<String, Object>> save(@RequestBody ChamadoDto dto) {
+    public ApiResponse<Map<String, Object>> save(@RequestParam("descricao") String descricao,
+                                                 @RequestParam("status") TipoStatus status,
+                                                 @RequestParam("id_setor") Long idSetor,
+                                                 @RequestParam("id_solicitante") Long idSolicitante,
+                                                 @RequestParam("id_prioridade") Long idPrioridade) {
+
+        Setor existeSetor = SetorDto.convert(setorService.findById(idSetor).getData());
+        Prioridade existePrioridade = PrioridadeDto.convert(prioridadeService.findById(idPrioridade).getData());
+        Usuario existeSolicitante = UsuarioDto.convert(usuarioService.findById(idSolicitante).getData());
+
+        ChamadoDto dto = new ChamadoDto(descricao, status, existeSetor, existeSolicitante, existePrioridade);
         ApiResponse<ChamadoDto> chamadoResponse = this.chamadoService.save(dto);
 
         Map<String, Object> mappedChamado = new LinkedHashMap<>();
@@ -91,7 +120,17 @@ public class ChamadoController {
     }
 
     @PutMapping("/chamados/{id}")
-    public ApiResponse<Map<String, Object>> updateById(@PathVariable Long id, @RequestBody ChamadoDto dto) {
+    public ApiResponse<Map<String, Object>> updateById(@PathVariable Long id, @RequestParam("descricao") String descricao,
+                                                       @RequestParam("status") TipoStatus status,
+                                                       @RequestParam("id_setor") Long idSetor,
+                                                       @RequestParam("id_responsavel") Long idResponsavel,
+                                                       @RequestParam("id_prioridade") Long idPrioridade) {
+
+        Setor existeSetor = SetorDto.convert(setorService.findById(idSetor).getData());
+        Prioridade existePrioridade = PrioridadeDto.convert(prioridadeService.findById(idPrioridade).getData());
+        Usuario existeReponsavel = UsuarioDto.convert(usuarioService.findById(idResponsavel).getData());
+
+        ChamadoDto dto = new ChamadoDto(descricao, status, existeSetor, existePrioridade, existeReponsavel);
         ApiResponse<ChamadoDto> chamadoResponse = this.chamadoService.updateById(id, dto);
 
         Map<String, Object> mappedChamado = new LinkedHashMap<>();

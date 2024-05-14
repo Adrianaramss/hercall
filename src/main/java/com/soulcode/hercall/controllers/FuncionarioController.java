@@ -1,9 +1,7 @@
 package com.soulcode.hercall.controllers;
 
 import com.soulcode.hercall.dtos.ChamadoDto;
-import com.soulcode.hercall.dtos.PrioridadeDto;
 import com.soulcode.hercall.dtos.SetorDto;
-import com.soulcode.hercall.enumerator.TipoStatus;
 import com.soulcode.hercall.models.Setor;
 import com.soulcode.hercall.services.ChamadoService;
 import com.soulcode.hercall.services.SetorService;
@@ -12,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
