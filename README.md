@@ -461,6 +461,107 @@ Output
 }
 ```
 
+### 🎯 LISTAR CHAMADOS POR PRIORIDADE .
+```URL
+GET - localhost:8080/chamados
+```
+  
+Output
+```JSON 
+{"status": 200,
+    "message": "Listagem de chamados realizada com sucesso!",
+    "data": [
+        {
+            "id": 1,
+            "descricao": "Chamado 1 - Descrição",
+            "status": "Aguardando técnico",
+            "data_inicio": "01/01/2024",
+            "data_termino": "N/A",
+            "id_setor": 5,
+            "tipoSetor": "Departamento pessoal",
+            "id_solicitante": 1,
+            "nome_solicitante": "Funcionario1",
+            "id_responsavel": 3,
+            "nome_responsavel": "Tecnico1",
+            "id_prioridade": 2,
+            "tipoPrioridade": "Média"
+        },
+        {
+            "id": 2,
+            "descricao": "Chamado 2 - Descrição",
+            "status": "Em atendimento",
+            "data_inicio": "01/02/2024",
+            "data_termino": "N/A",
+            "id_setor": 4,
+            "tipoSetor": "RH",
+            "id_solicitante": 1,
+            "nome_solicitante": "Funcionario1",
+            "id_responsavel": 3,
+            "nome_responsavel": "Tecnico1",
+            "id_prioridade": 4,
+            "tipoPrioridade": "Urgente"
+        },
+]
+}
+
+```
+### 🎯 PROCURAR  O CHAMADO PELO ID .
+```URL
+GET - localhost:8080/chamados/1
+```
+  
+Output
+```JSON 
+{
+    "status": 200,
+    "message": "Detalhamento de chamados realizado com sucesso!",
+    "data": {
+        "id": 1,
+        "descricao": "Chamado 1 - Descrição",
+        "status": "Aguardando técnico",
+        "data_inicio": "01/01/2024",
+        "data_termino": "N/A",
+        "id_setor": 5,
+        "tipoSetor": "Departamento pessoal",
+        "id_solicitante": 1,
+        "nome_solicitante": "Funcionario1",
+        "id_responsavel": 3,
+        "nome_responsavel": "Tecnico1",
+        "id_prioridade": 2,
+        "tipoPrioridade": "Média"
+    }
+}
+```
+
+### 🎯 EXCLUIR  O CHAMADO PELO ID .
+```URL
+GET - localhost:8080/chamados/1
+```
+  
+Output
+```JSON 
+{
+    "status": 200,
+    "message": "Chamado excluído com sucesso!",
+    "data": {
+        "id": 1,
+        "descricao": "Chamado 1 - Descrição",
+        "status": "Aguardando técnico",
+        "data_inicio": "01/01/2024",
+        "data_termino": "N/A",
+        "id_setor": 5,
+        "tipoSetor": "Departamento pessoal",
+        "id_solicitante": 1,
+        "nome_solicitante": "Funcionario1",
+        "id_responsavel": 3,
+        "nome_responsavel": "Tecnico1",
+        "id_prioridade": 2,
+        "tipoPrioridade": "Média"
+    }
+}
+```
+
+
 ## 🤝 Integrantes 
 [Anna Karoline](https://www.linkedin.com/in/annakarolinedevmobile/)  
 [Adriana Ramos](https://www.linkedin.com/in/adriana-ramss/)  
