@@ -354,6 +354,59 @@ Output
 }
 ```
 
+### 🎯 REGISTRA UMA PRIORIDADE NO BANCO DE DADOS.
+
+```URL
+POST - localhost:8080/prioridades
+```
+  
+```JSON
+{
+    "tipoPrioridade": "URGENTISSIMO"
+}
+```
+Output
+```JSON 
+{
+    "status": 201,
+    "message": "Prioridade cadastrada com sucesso!",
+    "data": {
+        "id_prioridade": 5,
+        "tipoPrioridade": "URGENTISSIMO"
+    }
+}
+```
+### 🎯 LISTAR PRIORIDADE.
+
+```URL
+GET - localhost:8080/prioridades
+```
+  
+Output
+```JSON 
+{
+    "status": 200,
+    "message": "Listagem de prioridades realizada com sucesso!",
+    "data": [
+        {
+            "id_prioridade": 3,
+            "tipoPrioridade": "Alta"
+        },
+        {
+            "id_prioridade": 1,
+            "tipoPrioridade": "Baixa"
+        },
+        {
+            "id_prioridade": 2,
+            "tipoPrioridade": "Média"
+        },
+        {
+            "id_prioridade": 4,
+            "tipoPrioridade": "Urgente"
+        }
+    ]
+}
+```
 ## 🤝 Integrantes 
 [Anna Karoline](https://www.linkedin.com/in/annakarolinedevmobile/)  
 [Adriana Ramos](https://www.linkedin.com/in/adriana-ramss/)  
