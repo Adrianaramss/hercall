@@ -21,6 +21,10 @@ public class SetorDto {
         this.id_setor = id_setor;
     }
 
+    public SetorDto(String tipoSetor) {
+        this.tipoSetor = tipoSetor;
+    }
+
     public SetorDto(Setor setor) {
         this.id_setor = setor.getId_setor();
         this.tipoSetor = setor.getTipoSetor();

@@ -21,6 +21,10 @@ public class PrioridadeDto {
         this.id_prioridade = id_prioridade;
     }
 
+    public PrioridadeDto(String tipoPrioridade) {
+        this.tipoPrioridade = tipoPrioridade;
+    }
+
     public PrioridadeDto(Prioridade prioridade) {
         this.id_prioridade = prioridade.getId_prioridade();
         this.tipoPrioridade = prioridade.getTipoPrioridade();

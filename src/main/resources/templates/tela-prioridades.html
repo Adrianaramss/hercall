@@ -58,28 +58,24 @@
             <H3>Prioridades</H3>
             <div class="row">
                 <div class="col-md-6">
-                    <form id="addDepartmentForm" action="/cadastra-prioridade" method="post">
-                        <div class="form-group">
-                            <label for="newDepartment">Adicionar Prioridade:</label>
-                            <input type="text" class="form-control" id="newDepartment" name="tipoPrioridade" placeholder="Digite o nome da nova prioridade">
-                        </div>
-                        <button type="submit" class="btn btn-success">Adicionar Prioridade</button>
-                    </form>
+                    <div class="form-group">
+                        <label for="addPrioridade">Adicionar Prioridade:</label>
+                        <input type="text" class="form-control" id="addPrioridade" name="tipoPrioridade" placeholder="Digite o nome da nova prioridade">
+                    </div>
+                    <button onclick="addPrioridade()" class="btn btn-success">Adicionar Prioridade</button>
                 </div>
                 <div class="col-md-6">
-                    <form id="deleteDepartmentForm" action="/exclui-prioridade" method="post">
-                        <div class="form-group">
-                            <label for="departmentName">Excluir Prioridade:</label>
-                            <input type="text" class="form-control" id="departmentName" name="tipoPrioridade" placeholder="Digite o nome da prioridade a excluir">
-                        </div>
-                        <button type="submit" class="btn btn-danger">Excluir Prioridade</button>
-                    </form>
+                    <div class="form-group">
+                        <label for="deletePrioridade">Excluir Prioridade:</label>
+                        <input type="text" class="form-control" id="deletePrioridade" name="tipoPrioridade" placeholder="Digite o nome da prioridade a excluir">
+                    </div>
+                    <button onclick="deletePrioridade()" class="btn btn-danger">Excluir Prioridade</button>
                 </div>
             </div>
 
 
             <!-- Lista de prioridades -->
-            <label for="newDepartment">Prioridades ativas no momento:</label>
+            <label>Prioridades ativas no momento:</label>
             <ul class="departments mt-2" th:each="prioridade:${prioridades}">
                 <li th:text="*{prioridade.tipoPrioridade}"></li>
             </ul>
@@ -87,6 +83,66 @@
     </div>
 </div>
 
+
+<script th:inline="javascript">
+    function addPrioridade() {
+      var prioridade = document.getElementById('addPrioridade').value;
+
+      var data = new URLSearchParams();
+      data.append('prioridade', prioridade);
+
+      fetch('/cadastra-prioridade', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: data
+      })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        if (data.message) {
+            alert(data.message);
+        } else {
+            alert("Ocorreu um erro ao tentar cadastrar o prioridade!");
+        }
+
+        setTimeout(() => {
+            location.reload();
+        }, 500);
+      });
+    }
+
+     function deletePrioridade() {
+      var prioridade = document.getElementById('deletePrioridade').value;
+
+      var data = new URLSearchParams();
+      data.append('prioridade', prioridade);
+
+      fetch('/exclui-prioridade', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: data
+      })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        if (data.message) {
+            alert(data.message);
+        } else {
+            alert("Ocorreu um erro ao tentar cadastrar o prioridade!");
+        }
+
+        setTimeout(() => {
+            location.reload();
+        }, 500);
+      });
+    }
+</script>
 
 <!-- JS do Bootstrap, jQuery e Popper.js -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

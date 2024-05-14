@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class AuthController {
@@ -42,7 +43,7 @@ public class AuthController {
     }
 
     @PostMapping("/login-usuario")
-    public String login(@ModelAttribute AuthDto dto) {
+    public String login(@ModelAttribute AuthDto dto, RedirectAttributes redirectAttributes) {
         ApiResponse<UsuarioDto> usuarioLogado = this.usuarioService.login(dto);
 
         if (usuarioLogado.getData() == null) {
@@ -50,6 +51,7 @@ public class AuthController {
         }
 
         if (usuarioLogado.getData().getTipoUsuario().equals(TipoUsuario.ADMIN)) {
+
             return "redirect:/tela-admin";
         } else if (usuarioLogado.getData().getTipoUsuario().equals(TipoUsuario.TECNICO)) {
             return "redirect:/tela-tecnico";

@@ -38,20 +38,20 @@ public class AdminController {
         List<Object[]> numeroChamadoPorMes = chamadoService.countChamadosByMes().getData();
 
         List<Integer> data = new ArrayList<>();
-        for(Object[] row : numeroChamadoPorMes) {
-            for(Object value: row) {
+        for (Object[] row : numeroChamadoPorMes) {
+            for (Object value : row) {
                 data.add(((BigDecimal) value).intValue());
             }
         }
-        List<String> labels = Arrays.asList("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro");
+        List<String> labels = Arrays.asList("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho");
         model.addAttribute("data", data);
         model.addAttribute("labels", labels);
 
         List<Object[]> numeroChamadoPorStatus = chamadoService.countChamadosByStatus().getData();
 
         List<Integer> dataStatus = new ArrayList<>();
-        for(Object[] row : numeroChamadoPorStatus) {
-            for(Object value: row) {
+        for (Object[] row : numeroChamadoPorStatus) {
+            for (Object value : row) {
                 dataStatus.add(((BigDecimal) value).intValue());
             }
         }
@@ -85,45 +85,27 @@ public class AdminController {
     }
 
     @PostMapping("/cadastra-setor")
-    public String saveSetor(@ModelAttribute SetorDto dto) {
-        ApiResponse<SetorDto> setorCadastrado = this.setorService.save(dto);
-
-        return "redirect:/tela-setores";
+    @ResponseBody
+    public ApiResponse<SetorDto> saveSetor(@RequestParam String setor) {
+        return this.setorService.save(new SetorDto(setor));
     }
 
     @PostMapping("/exclui-setor")
-    public String deleteSetorByNome(@ModelAttribute SetorDto setorDto, Model model) {
-        ApiResponse<SetorDto> setorExcluido = this.setorService.deleteByNome(setorDto.getTipoSetor());
-
-        return "redirect:/tela-setores";
-    }
-
-    @PostMapping("/exclui-setor/{id}")
-    public String deleteSetorById(@PathVariable Long id) {
-        ApiResponse<SetorDto> setorExcluido = this.setorService.deleteById(id);
-
-        return "redirect:/tela-setores";
+    @ResponseBody
+    public ApiResponse<SetorDto> deleteSetorByNome(@RequestParam("setor") String setor) {
+        return this.setorService.deleteByNome(setor);
     }
 
     @PostMapping("/cadastra-prioridade")
-    public String savePrioridade(@ModelAttribute PrioridadeDto dto) {
-        ApiResponse<PrioridadeDto> prioridadeCadastrado = this.prioridadeService.save(dto);
-
-        return "redirect:/tela-prioridades";
+    @ResponseBody
+    public ApiResponse<PrioridadeDto> savePrioridade(@RequestParam("prioridade") String prioridade) {
+        return this.prioridadeService.save(new PrioridadeDto(prioridade));
     }
 
     @PostMapping("/exclui-prioridade")
-    public String deletePrioridadePorNome(@ModelAttribute PrioridadeDto prioridadeDto, Model model) {
-        ApiResponse<PrioridadeDto> prioridadeExcluido = this.prioridadeService.deleteByNome(prioridadeDto.getTipoPrioridade());
-
-        return "redirect:/tela-prioridades";
-    }
-
-    @PostMapping("/exclui-prioridade/{id}")
-    public String deletePrioridadeById(@PathVariable Long id) {
-        ApiResponse<PrioridadeDto> prioridadeExcluido = this.prioridadeService.deleteById(id);
-
-        return "redirect:/tela-prioridades";
+    @ResponseBody
+    public ApiResponse<PrioridadeDto> deletePrioridadePorNome(@RequestParam("prioridade") String prioridade) {
+        return this.prioridadeService.deleteByNome(prioridade);
     }
 
 }

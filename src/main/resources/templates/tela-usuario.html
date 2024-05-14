@@ -13,12 +13,10 @@
 <body class="bg-gradient-primary">
 <div class="header">
     <div class="user-info">
-        <span>Bem-vindo, João da Silva</span>
-        <span>| Matrícula: 12345</span>
+        <span>Bem-vindo!</span>
     </div>
     <a href="/" class="logout">Sair</a>
 </div>
-
 
 <div class="container">
     <div class="table-container">
@@ -40,7 +38,7 @@
                 <td th:text="*{chamado.id}"></td>
                 <td th:text="*{chamado.setor.tipoSetor}"></td>
                 <td th:text="*{chamado.descricao}"></td>
-                <td th:text="${chamado.prioridade != null} ? ${#strings.toUpperCase(chamado.prioridade.tipoPrioridade)} : 'Prioridade não definida'"></td>
+                <td th:text="${chamado.prioridade != null} ? ${chamado.prioridade.tipoPrioridade} : 'Prioridade não definida'"></td>
                 <td th:text="*{chamado.data_inicio}"></td>
                 <td th:text="*{chamado.data_termino}"></td>
                 <td th:text="*{chamado.status}"></td>
@@ -51,51 +49,52 @@
 
 
     <div class="form-container">
-        <h2>Criar Novo Chamado</h2>
-        <form method="post" action="/cadastra-chamado">
-            <label for="setor">Setor:</label>
-            <select id="setor" name="setor" required>
-                <option value="">Selecione o Setor</option>
-                <option th:each="option : ${setores}" th:value="${option.id_setor}" th:text="${option.tipoSetor}"></option>
-            </select>
+        <h2>Criar Novo Chamado </h2>
+        <label for="setor">Setor:</label>
+        <select id="setor" name="setor" required>
+            <option value="">Selecione o Setor</option>
+            <option th:each="option : ${setores}" th:value="${option.id_setor}" th:text="${option.tipoSetor}"></option>
+        </select>
 
-            <label for="descricao">Descrição:</label>
-            <input type="text" id="descricao" name="descricao" placeholder="Descreva o problema" required>
+        <label for="descricao">Descrição:</label>
+        <input type="text" id="descricao" name="descricao" placeholder="Descreva o problema" required>
 
-            <button class="btn btn-primary btn-user btn-block" type="submit">Criar Chamado</button>
-        </form>
-        <div th:if="${session.statusChamado != null}" onload="showModal([[${session.mensagem}]]);"></div>
+        <button class="btn btn-primary btn-user btn-block" onclick="saveChamado()">Criar Chamado</button>
     </div>
 </div>
 
+<script th:inline="javascript">
+    function saveChamado() {
+      var setor = document.getElementById('setor').value;
+      var descricao = document.getElementById('descricao').value;
 
-<!-- Modal -->
-<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="successModalLabel" th:text="${session.statusChamado != null && session.statusChamado == 200} ? 'Sucesso!' : 'Erro!'"></h5>
+      var data = new URLSearchParams();
+      data.append('setor', setor);
+      data.append('descricao', descricao);
 
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" th:text="${session.mensagem}">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
+      fetch('/cadastra-chamado', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: data
+      })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        if (data.message) {
+            alert(data.message);
+        } else {
+            alert("Ocorreu um erro ao tentar cadastrar o chamado!");
+        }
 
-
-<script>
-    function showModal() {
-        $('#successModal').modal('show');
+        setTimeout(() => {
+            location.reload();
+        }, 500);
+      });
     }
 </script>
-
 
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

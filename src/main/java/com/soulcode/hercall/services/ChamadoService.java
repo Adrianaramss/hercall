@@ -23,7 +23,6 @@ public class ChamadoService {
         try {
             dto.setData_inicio(LocalDate.now());
             dto.setStatus(TipoStatus.AGUARDANDO_TECNICO);
-            //Definir Usuario Solicitante por Security
             Chamado chamado = ChamadoDto.convert(dto);
             chamado = this.chamadoRepository.save(chamado);
 
@@ -66,6 +65,10 @@ public class ChamadoService {
                 return new ApiResponse<>(400, "Não é possível editar, pois chamado já foi finalizado!", null);
             }
 
+            if(dto.getStatus().equals(TipoStatus.FINALIZADO) || dto.getStatus().equals(TipoStatus.CANCELADO)) {
+                dto.setData_termino(LocalDate.now());
+            }
+
             Chamado chamado = ChamadoDto.convert(dto);
             chamado.setId(id);
 
@@ -85,7 +88,7 @@ public class ChamadoService {
                 return new ApiResponse<>(404, "Não foi possível excluir, pois chamado não foi encontrado por ID!", null);
             }
 
-            if (chamadoRepository.existChamadoComReponsavel(id)) {
+            if (existeChamado.getData().getStatus().equals(TipoStatus.EM_ATENDIMENTO)) {
                 return new ApiResponse<>(400, "Não é possível excluir, pois um técnico está atendendo esse chamado!", null);
             }
 

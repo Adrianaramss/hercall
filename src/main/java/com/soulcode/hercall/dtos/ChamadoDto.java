@@ -56,6 +56,11 @@ public class ChamadoDto {
         this.prioridade = chamado.getPrioridade();
     }
 
+    public ChamadoDto(Setor setor, String descricao) {
+        this.setor = setor;
+        this.descricao = descricao;
+    }
+
     public static Chamado convert(ChamadoDto chamadoDto) {
         Chamado chamado = new Chamado(chamadoDto.id);
 

@@ -65,8 +65,8 @@ public class DataInitializer implements CommandLineRunner {
 
     private void initUsuarios() {
         String[] matriculas = {"123", "456", "789"};
-        String[] nomes = {"Funcionario1", "Admin1", "Tecnico1"};
-        String[] emails = {"funcionario1@example.com", "admin1@example.com", "tecnico1@example.com"};
+        String[] nomes = {"Rafaela", "Maria", "João"};
+        String[] emails = {"rafaela@funcionario.com", "maria@admin.com", "joao@tecnico.com"};
         String[] senhas = {"senha123", "senha456", "senha789"};
 
         TipoUsuario[] tiposUsuario = {TipoUsuario.FUNCIONARIO, TipoUsuario.ADMIN, TipoUsuario.TECNICO};
@@ -96,12 +96,12 @@ public class DataInitializer implements CommandLineRunner {
 
         int YEAR = LocalDate.now().getYear();
 
-        for (int i = 0; i < tiposStatus.length; i++) {
-            int month = i + 1;
+        for (TipoStatus status : tiposStatus) {
+            int month = random.nextInt(5) + 1;
             Chamado chamado = new Chamado();
             chamado.setDescricao("Chamado " + month + " - Descrição");
             chamado.setData_inicio(LocalDate.of(YEAR, month, 1));
-            chamado.setStatus(tiposStatus[i]);
+            chamado.setStatus(status);
             chamado.setSetor(setores.get(random.nextInt(setores.size())));
             chamado.setSolicitante(usuarios.get(0));
             chamado.setResponsavel(usuarios.get(2));

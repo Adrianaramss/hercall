@@ -51,34 +51,90 @@
 
         <!-- Main Content -->
         <div class="col-md-9">
-          <H3>Setores</H3>
+            <H3>Setores</H3>
             <div class="row">
                 <div class="col-md-6">
-                    <form id="addDepartmentForm" action="/cadastra-setor" method="post">
-                        <div class="form-group">
-                            <label for="newDepartment">Adicionar Setor:</label>
-                            <input type="text" class="form-control" id="newDepartment" name="tipoSetor" placeholder="Digite o nome do novo setor">
-                        </div>
-                        <button type="submit" class="btn btn-success">Adicionar Setor</button>
-                    </form>
+                    <div class="form-group">
+                        <label for="addSetor">Adicionar Setor:</label>
+                        <input type="text" class="form-control" id="addSetor" name="tipoSetor" placeholder="Digite o nome do novo setor">
+                    </div>
+                    <button onclick="addSetor()" class="btn btn-success">Adicionar Setor</button>
                 </div>
                 <div class="col-md-6">
-                    <form id="deleteDepartmentForm" action="/exclui-setor" method="post">
-                        <div class="form-group">
-                            <label for="departmentName">Excluir Setor:</label>
-                            <input type="text" class="form-control" id="departmentName" name="tipoSetor" placeholder="Digite o nome do setor a excluir">
-                        </div>
-                        <button type="submit" class="btn btn-danger">Excluir Setor</button>
-                    </form>
+                    <div class="form-group">
+                        <label for="deleteSetor">Excluir Setor:</label>
+                        <input type="text" class="form-control" id="deleteSetor" name="tipoSetor" placeholder="Digite o nome do setor a excluir">
+                    </div>
+                    <button onclick="deleteSetor()" class="btn btn-danger">Excluir Setor</button>
                 </div>
             </div>
-            <label for="newDepartment">Setores ativos no momento:</label>
+            <label>Setores ativos no momento:</label>
             <ul class="departments mt-2" th:each="setor:${setores}">
                 <li th:text="*{setor.tipoSetor}"></li>
             </ul>
         </div>
     </div>
 </div>
+
+<script th:inline="javascript">
+    function addSetor() {
+      var setor = document.getElementById('addSetor').value;
+
+      var data = new URLSearchParams();
+      data.append('setor', setor);
+
+      fetch('/cadastra-setor', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: data
+      })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        if (data.message) {
+            alert(data.message);
+        } else {
+            alert("Ocorreu um erro ao tentar cadastrar o setor!");
+        }
+
+        setTimeout(() => {
+            location.reload();
+        }, 500);
+      });
+    }
+
+     function deleteSetor() {
+      var setor = document.getElementById('deleteSetor').value;
+
+      var data = new URLSearchParams();
+      data.append('setor', setor);
+
+      fetch('/exclui-setor', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: data
+      })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        if (data.message) {
+            alert(data.message);
+        } else {
+            alert("Ocorreu um erro ao tentar cadastrar o setor!");
+        }
+
+        setTimeout(() => {
+            location.reload();
+        }, 500);
+      });
+    }
+</script>
 
 <!-- JS do Bootstrap, jQuery e Popper.js -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

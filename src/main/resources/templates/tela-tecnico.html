@@ -12,7 +12,7 @@
 <body class="bg-gradient-primary">
 <div class="header">
     <div class="user-info">
-        Bem-vindo, João da Silva | Técnico
+        Bem-vindo!
     </div>
     <a href="/" class="logout">Sair</a>
 </div>
@@ -95,14 +95,14 @@
         document.getElementById('edit-modal').style.display = 'flex';
     }
 
-    function saveModal() {
+   function saveModal() {
       var id = document.getElementById('id').value;
       var status = document.getElementById('status-select').value;
       var prioridade = document.getElementById('priority-select').value;
 
-       var data = new URLSearchParams();
-       data.append('status', status);
-       data.append('prioridade', prioridade);
+      var data = new URLSearchParams();
+      data.append('status', status);
+      data.append('prioridade', prioridade);
 
       fetch('/edita-chamado/' + id, {
         method: 'POST',
@@ -112,17 +112,15 @@
         body: data
       })
         .then((response) => {
-           closeModal();
-
-           if(response.status == 200) {
-                alert("Chamado editado com sucesso!");
-           } else {
-                alert("Ocorreu um erro ao tentar editar o chamado!");
-           }
-
-           setTimeout(() => {
-               location.reload();
-            }, 2000);
+          closeModal();
+          return response.json();
+        })
+        .then((data) => {
+          if (data.message) {
+            alert(data.message);
+          } else {
+            alert("Ocorreu um erro ao tentar editar o chamado!");
+          }
         });
       }
 </script>
