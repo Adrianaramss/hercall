@@ -62,6 +62,7 @@ O projeto HerCall é um sistema de gerenciamento de chamados desenvolvido utiliz
 - Spring Boot DevTools
 - Lombok
 - Bootstrap
+- Hibernate
 
 
 
@@ -237,7 +238,121 @@ Output
     }
 }
 ```
+### 🎯 REGISTRA UM SETOR NO BANCO DE DADOS.
 
+```URL
+POST - localhost:8080/setores
+```
+  
+```JSON
+{
+    "tipoSetor": "Vendas"
+}
+```
+Output
+```JSON 
+{
+    "status": 201,
+    "message": "Setor cadastrado com sucesso!",
+    "data": {
+        "id_setor": 7,
+        "tipoSetor": "Vendas"
+    }
+}
+```
+### 🎯 LISTAR TODOS OS SETORES.
+
+```
+Output
+```JSON 
+{
+    "status": 200,
+    "message": "Listagem de setores realizada com sucesso!",
+    "data": [
+        {
+            "id_setor": 5,
+            "tipoSetor": "Departamento pessoal"
+        },
+        {
+            "id_setor": 6,
+            "tipoSetor": "Desenvolvimento web"
+        },
+        {
+            "id_setor": 2,
+            "tipoSetor": "Financeiro"
+        },
+        {
+            "id_setor": 3,
+            "tipoSetor": "Markenting"
+        },
+        {
+            "id_setor": 4,
+            "tipoSetor": "RH"
+        },
+        {
+            "id_setor": 1,
+            "tipoSetor": "Suporte"
+        },
+        {
+            "id_setor": 7,
+            "tipoSetor": "Vendas"
+        }
+    ]
+}
+```
+### 🎯 PROCURAR  O SETOR PELO ID .
+```URL
+GET - localhost:8080/setores/2
+```
+  
+Output
+```JSON 
+{
+    "status": 200,
+    "message": "Detalhamento de setor realizado com sucesso!",
+    "data": {
+        "id_setor": 2,
+        "tipoSetor": "Financeiro"
+    }
+}
+```
+### 🎯 EDITAR UM SETOR PELO SEU ID .
+```URL
+PUT - localhost:8080/setores/7
+```
+  ```JSON
+{
+    "tipoSetor": "COMERCIAL"
+}
+```
+Output
+```JSON 
+{
+    "status": 200,
+    "message": "Setor editado com sucesso!",
+    "data": {
+        "id_setor": 7,
+        "tipoSetor": "COMERCIAL"
+    }
+}
+
+```
+### 🎯 EXCLUIR O USUARIO PELO ID .
+```URL
+DELETE - localhost:8080/setores/7
+```
+  
+Output
+```JSON 
+{
+    "status": 200,
+    "message": "Setor excluído com sucesso!",
+    "data": {
+        "id_setor": 7,
+        "tipoSetor": "COMERCIAL"
+    }
+}
+```
 
 ## 🤝 Integrantes 
 [Anna Karoline](https://www.linkedin.com/in/annakarolinedevmobile/)  
