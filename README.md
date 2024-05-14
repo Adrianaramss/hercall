@@ -262,7 +262,7 @@ Output
 ```
 ### 🎯 LISTAR TODOS OS SETORES.
 
-```
+
 Output
 ```JSON 
 {
