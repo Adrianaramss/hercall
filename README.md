@@ -565,7 +565,9 @@ Output
 POST - localhost:8080/chamados
 ```
 
-``` QUERY PARAMS
+QUERY PARAMS
+```JSON 
+
 {
      
         "descricao": "Descrição",
@@ -575,7 +577,7 @@ POST - localhost:8080/chamados
         "id_solicitante": 1,
         "id_prioridade": 1
     }
-
+    
 ```
 
 Output
@@ -605,7 +607,8 @@ Output
 PUT - localhost:8080/chamados/13
 ```
 
-``` QUERY PARAMS
+QUERY PARAMS
+```JSON 
 {
      
         "descricao": "Solicitação de serviço",
