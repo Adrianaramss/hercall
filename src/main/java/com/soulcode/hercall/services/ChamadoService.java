@@ -61,7 +61,7 @@ public class ChamadoService {
                 return new ApiResponse<>(404, "Não é possível editar, pois chamado não foi encontrado por ID!", null);
             }
 
-            if (existeChamado.getData().getStatus().equals(TipoStatus.FINALIZADO)) {
+            if (existeChamado.getData().getStatus().equals(TipoStatus.FINALIZADO) || existeChamado.getData().getStatus().equals(TipoStatus.CANCELADO)) {
                 return new ApiResponse<>(400, "Não é possível editar, pois chamado já foi finalizado!", null);
             }
 
