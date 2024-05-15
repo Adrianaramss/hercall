@@ -337,7 +337,7 @@ Output
 }
 
 ```
-### 🎯 EXCLUIR O USUARIO PELO ID .
+### 🎯 EXCLUIR UM SETOR PELO ID .
 ```URL
 DELETE - localhost:8080/setores/7
 ```
