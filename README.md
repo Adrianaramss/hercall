@@ -560,7 +560,87 @@ Output
     }
 }
 ```
+### 🎯 CRIAR CHAMADO .
+```URL
+POST - localhost:8080/chamados
+```
 
+``` QUERY PARAMS
+{
+     
+        "descricao": "Descrição",
+        "status": "Aguardando técnico",
+        "id_setor": 1,
+        "tipoSetor": "Suporte",
+        "id_solicitante": 1,
+        "id_prioridade": 1
+    }
+
+```
+
+Output
+```JSON 
+{
+    "status": 201,
+    "message": "Chamado cadastrado com sucesso!",
+    "data": {
+        "id": 13,
+        "descricao": "Descrição",
+        "status": "Aguardando técnico",
+        "data_inicio": "14/05/2024",
+        "data_termino": "N/A",
+        "id_setor": 1,
+        "tipoSetor": "Suporte",
+        "id_solicitante": 1,
+        "nome_solicitante": "Funcionario1",
+        "id_responsavel": "N/A",
+        "nome_responsavel": "N/A",
+        "id_prioridade": 1,
+        "tipoPrioridade": "Baixa"
+    }
+}
+```
+### 🎯 EDITAR CHAMADO PELO ID .
+```URL
+PUT - localhost:8080/chamados/13
+```
+
+``` QUERY PARAMS
+{
+     
+        "descricao": "Solicitação de serviço",
+        "status": "FINALIZADO",
+        "id_setor": 1,
+        "id_solicitante": 1,
+        "id_responsavel": 1,
+        "id_prioridade": 1
+       
+    }
+
+```
+
+Output
+```JSON 
+{
+    "status": 200,
+    "message": "Chamado editado com sucesso!",
+    "data": {
+        "id": 13,
+        "descricao": "Solicitação de serviço",
+        "status": "Finalizado",
+        "data_inicio": "N/A",
+        "data_termino": "14/05/2024",
+        "id_setor": 1,
+        "tipoSetor": "Suporte",
+        "id_solicitante": "N/A",
+        "nome_solicitante": "N/A",
+        "id_responsavel": 1,
+        "nome_responsavel": "Funcionario1",
+        "id_prioridade": 1,
+        "tipoPrioridade": "Baixa"
+    }
+}
+```
 
 ## 🤝 Integrantes 
 [Anna Karoline](https://www.linkedin.com/in/annakarolinedevmobile/)  
