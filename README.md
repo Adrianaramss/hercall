@@ -642,6 +642,10 @@ Output
 }
 ```
 
+## 📖 Documentação Postman
+
+[Clique aqui!](https://documenter.getpostman.com/view/24460801/2sA3JQ5fmw)
+
 ## 🤝 Integrantes 
 [Anna Karoline](https://www.linkedin.com/in/annakarolinedevmobile/)  
 [Adriana Ramos](https://www.linkedin.com/in/adriana-ramss/)  
